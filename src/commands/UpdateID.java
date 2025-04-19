@@ -1,8 +1,7 @@
 package commands;
-import basic.*;
-import java.util.ArrayDeque;
+import commands.base.Command;
 
-public class UpdateID extends Command{
+public class UpdateID extends Command {
     UpdateID() {
         super("update id {element}");
     }

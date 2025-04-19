@@ -1,11 +1,13 @@
 package commands;
 
 import basic.Person;
+import commands.base.Command;
+import commands.base.Environment;
 
 import java.util.ArrayDeque;
 
-public class RemoveHead extends Command{
-    RemoveHead(){
+public class RemoveHead extends Command {
+    private RemoveHead(){
         super("remove_head");
     }
 
