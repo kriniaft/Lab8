@@ -16,6 +16,7 @@ public class Coordinates {
     }
 
     public float getX(){
+        System.out.println();
         return x;
     }
 
