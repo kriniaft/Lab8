@@ -1,4 +1,14 @@
 package commands;
+import java.io.*;
+        import java.util.ArrayDeque;
 
-public class Save {
+class Save {
+    public void save(ArrayDeque<Person> arDeq, String fileName) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            outputStream.writeObject(arDeq);
+        } catch (Exception e) {
+            System.out.println("Ошибка при сохранении");
+        }
+    }
 }
+

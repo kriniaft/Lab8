@@ -9,5 +9,7 @@ public class Main{
         Add add = new Add();
         add.add(coll.collection());
         System.out.println(coll.collection().peekLast());
+        System.out.println("Введите название команды или help, чтобы узнать больше о командах (для выхода используйте 'exit'");
+
     }
 }
