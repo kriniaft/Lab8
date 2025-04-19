@@ -3,9 +3,10 @@ package commands;
 import basic.Person;
 
 import java.util.ArrayDeque;
+import java.util.HashMap;
 
 public class RemoveHead extends Command{
-    RemoveHead(){
+   private RemoveHead(){
         super("remove_head");
     }
 
@@ -17,6 +18,12 @@ public class RemoveHead extends Command{
     @Override
     public void execute (ArrayDeque<Person> arDeq){
         arDeq.poll();
+    }
+
+    public static void register(HashMap<String, Command> stringCommandHashMap) {
+        RemoveHead removeHead = new RemoveHead();
+        stringCommandHashMap.put(removeHead.getName(), removeHead);
+
     }
 
 }
