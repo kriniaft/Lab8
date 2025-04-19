@@ -18,6 +18,7 @@ public class Main{
 
         HashMap<String, Command> map = new HashMap<>();
         Add.register(map);
+        Show.register(map);
 
         while (in.hasNextLine()) {
             String line = in.nextLine();
