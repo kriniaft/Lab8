@@ -5,19 +5,6 @@ import java.util.Scanner;
 
 public class FieldsWork {
 
-        public long id() {
-                System.out.println("Введите ID:");
-                while (true) {
-                    Scanner sc = new Scanner(System.in);
-                    if (sc.hasNextLong()) {
-                        return sc.nextLong();
-                    } else {
-                        System.out.println("Некорректный ввод. Пожалуйста, введите числовое значение");
-                        sc.next();
-                    }
-                }
-            }
-
         public String name()  {
             System.out.println("Введите Имя:");
             String name;
@@ -147,7 +134,7 @@ public class FieldsWork {
                     System.out.println("По Х");
                     Scanner sc8 = new Scanner(System.in);
                     String xInput = sc8.nextLine();
-                    float x = Float.parseFloat(xInput);
+                    Float x = Float.parseFloat(xInput);
                     if (xInput.isEmpty()) {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
                     }
@@ -163,7 +150,7 @@ public class FieldsWork {
                     System.out.println("По Z");
                     Scanner sc10 = new Scanner(System.in);
                     String zInput = sc10.nextLine();
-                    float z = Float.parseFloat(zInput);
+                    Float z = Float.parseFloat(zInput);
                     if (zInput.isEmpty()) {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
                     }

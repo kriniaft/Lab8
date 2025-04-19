@@ -1,5 +1,9 @@
 package commands;
 
+import basic.Person;
+
+import java.util.ArrayDeque;
+
 public abstract class Command {
     private final String name;
 
@@ -11,7 +15,7 @@ public abstract class Command {
         return name;
     }
 
-    public abstract void execute();
+    public abstract void execute(ArrayDeque<Person> arDeq) throws NullException;
 
-    public abstract void getHelp();
+    public abstract String getHelp();
 }

@@ -11,7 +11,7 @@ public class Person {
     private Location location;
 
 
-    public Person( String n, Coordinates c, Float h, String p, Color hc, Country nt, Location l){
+    public Person(String n, Coordinates c, Float h, String p, Color hc, Country nt, Location l){
         setName(n);
         setCoordinates(c);
         setHeight(h);
