@@ -22,7 +22,7 @@ public class Main{
 
         while (in.hasNextLine()) {
             String line = in.nextLine();
-
+            map.keySet().contains
         }
     }
 }

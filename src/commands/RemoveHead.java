@@ -18,4 +18,5 @@ public class RemoveHead extends Command{
     public void execute (ArrayDeque<Person> arDeq){
         arDeq.poll();
     }
+
 }
