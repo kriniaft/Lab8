@@ -1,5 +1,7 @@
 package commands;
  import basic.*;
+
+ import java.util.HashMap;
  import java.util.Scanner;
  import java.util.ArrayDeque;
 
@@ -21,4 +23,11 @@ public class Add extends Command {
     public String getHelp() {
        return "Добавляет человека в коллекцию";
    }
+
+   public static void register(HashMap<String, Command> stringCommandHashMap) {
+       Add add = new Add();
+       stringCommandHashMap.put(add.getName(), add);
+   }
+
+
 }
