@@ -1,110 +1,116 @@
 package basic;
+
+import java.time.ZonedDateTime;
+
 public class Person {
-    private long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
+    private final long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private String name;
+    private Coordinates coordinates;
     private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private float height; //Поле не может быть null, Значение поля должно быть больше 0
-    private String passportID; //Поле может быть null
+    private Float height; /
+    private String passportID;
     private Color hairColor; //Поле не может быть null
-    private Country nationality; //Поле может быть null
+    private Country nationality;
     private Location location; //Поле не может быть null
 
-    public Person(long i){
-        id = i;
+    public Person(long id, String name, Coordinates coordinates, ZonedDateTime creationDate, Float height, String passportID, Color hairColor, Country nationality, Location location ) throws IllegalArgumentException {
+        this.id = id;
+        this.setName(name);
+        this.setCoordinates(coordinates);
+        this.setHeight(height);
+        this.creationDate = creationDate;
+        this.passportID = passportID;
+        this.setHairColor(hairColor);
+        this.nationality = nationality;
+        this.setLocation(location);
     }
 
-    public Person(long i, String n){
-        id = i;
-        name = n;
-    }
-
-    public Person(long i, String n, Coordinates c){
-        id = i;
-        name = n;
-        coordinates = c;
-    }
-
-    public Person(long i, String n, Coordinates c, float h){
-        id = i;
-        name = n;
-        coordinates = c;
-        height = h;
-    }
-
-    public Person(long i, String n, Coordinates c, float h, String p){
-        id = i;
-        name = n;
-        coordinates = c;
-        height = h;
-        passportID = p;
-    }
-
-    public Person(long i, String n, Coordinates c, float h, String p, Color hc){
-        id = i;
-        name = n;
-        coordinates = c;
-        height = h;
-        passportID = p;
-        hairColor = hc;
-    }
-
-    public Person(long i, String n, Coordinates c, float h, String p, Color hc, Country nt){
-        id = i;
-        name = n;
-        coordinates = c;
-        height = h;
-        passportID = p;
-        hairColor = hc;
-        nationality = nt;
-    }
-
-    public Person(long i, String n, Coordinates c, float h, String p, Color hc, Country nt, Location l){
-        id = i;
-        name = n;
-        coordinates = c;
-        height = h;
-        passportID = p;
-        hairColor = hc;
-        nationality = nt;
-        location = l;
-    }
-
-
-    public long getId(){
+    public long getId() {
         return id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public Coordinates getCoordinates(){
+    public void setName(String name) throws IllegalArgumentException {
+        if(name != null && name.isBlank()) {
+            this.name = name;
+        } else {
+            throw new IllegalArgumentException("name не может быть null, Строка не может быть пустой");
+        }
+    }
+
+    public Coordinates getCoordinates() {
         return coordinates;
     }
 
-    public java.time.ZonedDateTime getCreationDate(){
+    public void setCoordinates(Coordinates coordinates) throws IllegalArgumentException {
+        if(coordinates != null) {
+            this.coordinates = coordinates;
+        } else {
+            throw new IllegalArgumentException("coordinates не может быть null");
+        }
+    }
+
+    public ZonedDateTime getCreationDate() {
         return creationDate;
     }
 
-    public float getHeight(){
+    public void setCreationDate(ZonedDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public float getHeight() {
         return height;
     }
 
-    public String getPassportID(){
+    public void setHeight(Float height) {
+        if(height != null && height > 0) {
+            this.height = height;
+        } else {
+            throw new IllegalArgumentException("height не может быть null, Значение поля должно быть больше 0");
+        }
+    }
+
+    public String getPassportID() {
         return passportID;
     }
 
-    public Color getHairColor(){
+    public void setPassportID(String passportID) {
+        this.passportID = passportID;
+    }
+
+    public Color getHairColor() {
         return hairColor;
     }
 
-    public Country getNationality(){
+    public void setHairColor(Color hairColor) {
+        if (hairColor != null) {
+            this.hairColor = hairColor;
+        } else {
+            throw new IllegalArgumentException("hairColor не может быть null");
+        }
+    }
+
+    public Country getNationality() {
         return nationality;
     }
 
-    public Location getLocation(){
+    public void setNationality(Country nationality) {
+        this.nationality = nationality;
+    }
+
+    public Location getLocation() {
         return location;
+    }
+
+    public void setLocation(Location location) {
+        if (location != null) {
+            this.location = location;
+        } else {
+            throw new IllegalArgumentException("location не может быть null");
+        }
     }
 
     public String toString(){
