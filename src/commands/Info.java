@@ -8,6 +8,13 @@ public class Info extends Command {
         super("info");
     }
 
+    @Override
+    public void execute(Environment env) {
+
+    }
+
+
+    @Override
     public String getHelp(){
         return "Выводит информацию о коллекции";
     }
