@@ -9,6 +9,15 @@ public class Exit extends Command {
     }
 
     @Override
+    public void execute(Environment env) {
+        System.out.println("Завершение программы...");
+        System.exit(0);
+
+    }
+
+
+
+    @Override
     public String getHelp(){
         return "завершить программу (без сохранения в файл)";
     }

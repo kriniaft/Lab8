@@ -2,7 +2,7 @@ package commands;
 import commands.base.*;
 
 import java.util.HashMap;
-import java.util.List;
+
 
 public class CountBySameHeight extends Command{
     private CountBySameHeight(){
@@ -11,26 +11,21 @@ public class CountBySameHeight extends Command{
 
 
     @Override
-    public String execute(Environment env, List<String> args) {
-        if (args.isEmpty()) {
-            return "Ошибка: необходимо указать рост для поиска.";
-        }
+    public void execute(Environment env) {
+        FieldsWork fw = new FieldsWork();
+        float targetHeight = fw.height();
 
         if (env.getProfiles() == null) {
-            return "Ошибка: коллекция профилей не инициализирована.";
+            System.out.println("Ошибка: коллекция профилей не инициализирована.");
+            return;
         }
 
-        try {
-            float targetHeight = Float.parseFloat(args.get(0));
-            long count = env.getProfiles().stream()
-                    .filter(person -> person.getHeight() == targetHeight)
-                    .count();
-            return "Количество людей с ростом " + targetHeight + ": " + count;
-        } catch (NumberFormatException e) {
-            return "Ошибка: некорректный формат роста. Пожалуйста, введите число.";
-        }
+        long count = env.getProfiles().stream()
+                .filter(person -> person.getHeight() == targetHeight)
+                .count();
+        System.out.println("Количество людей с ростом " + targetHeight + ": " + count);
+
     }
-
 
     @Override
     public String getHelp(){

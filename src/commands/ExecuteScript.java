@@ -8,6 +8,8 @@ public class ExecuteScript extends Command{
         super("execute_script");
     }
 
+
+
     @Override
     public String getHelp(){
         return "исполнит скрипт из файла";
