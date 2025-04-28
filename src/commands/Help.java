@@ -10,8 +10,10 @@ public class Help extends Command {
         super("help");
     }
 
-    public String getHelp(){
+    public String getHelp() {
         return "Выводит список всех команд";
+    }
+
     public void execute(Environment env) {
         HashMap<String, Command> stringCommandHashMap = env.getStringCommandHashmap();
         stringCommandHashMap.forEach((key, value) -> {
