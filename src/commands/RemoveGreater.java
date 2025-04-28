@@ -13,4 +13,5 @@ public class RemoveGreater extends Command{
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         RemoveGreater removeGreater = new RemoveGreater();
         stringCommandHashMap.put(removeGreater.getName(), removeGreater);
+    }
 }

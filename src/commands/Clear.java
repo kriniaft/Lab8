@@ -10,6 +10,8 @@ public class Clear extends Command {
         super("clear");
     }
 
+
+
     @Override
     public String getHelp(){
         return "Очищает коллекцию (удаляет все элементы)";
@@ -23,6 +25,7 @@ public class Clear extends Command {
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         Clear clear = new Clear();
         stringCommandHashMap.put(clear.getName(), clear);
+    }
 
 
 }
