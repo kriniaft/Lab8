@@ -4,6 +4,8 @@ import basic.Color;
 import commands.base.Command;
 import commands.base.Environment;
 
+import java.util.HashMap;
+
 public class PrintUniqueHair extends Command {
     public PrintUniqueHair() {
         super("print_unique_hair_color");
@@ -14,7 +16,12 @@ public class PrintUniqueHair extends Command {
         return "Выводит уникальные цвета волос";
     }
 
+    public static void register(HashMap<String, Command> stringCommandHashMap) {
+        PrintUniqueHair puh = new PrintUniqueHair();
+        stringCommandHashMap.put(puh.getName(), puh);
+    }
 
+    @Override
     public void execute(Environment env) {
         long countGreen = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.GREEN).count();
         long countBlue = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.BLUE).count();
