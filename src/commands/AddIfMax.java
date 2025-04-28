@@ -4,7 +4,6 @@ import basic.Person;
 import commands.base.*;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class AddIfMax extends Command {
    private AddIfMax(){
