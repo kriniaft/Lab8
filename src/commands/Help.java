@@ -7,11 +7,7 @@ public class Help extends Command {
         super("help");
     }
 
-
-
-
-
-
-        System.out.println("Доступные команды:");
+    public String getHelp(){
+        return "Выводит список всех команд";
     }
 }
