@@ -1,4 +1,5 @@
 package basic;
+import java.util.Random;
 public class Person {
     private final long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name;
@@ -19,6 +20,8 @@ public class Person {
         setHairColor(hc);
         setNationality(nt);
         setLocation(l);
+        Random random = new Random();
+        id = random.nextLong(1000);
     }
 
 
