@@ -21,7 +21,7 @@ public class Info extends Command {
             return;
         }
         System.out.println("  Тип коллекции: " + profiles.getClass().getSimpleName());
-        System.out.println(" Дата инициализации: " + initializationDate != null ? initializationDate.toString() : "не определена");
+        System.out.println(initializationDate.toString());
         System.out.println("  Количество элементов: " + profiles.size());
 
 

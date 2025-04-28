@@ -27,8 +27,6 @@ public class PrintUniqueHair extends Command {
         if(countRed > 0){ System.out.println("Красный");}
         if(countWhite > 0){ System.out.println("Белый");}
         if(countYellow > 0){ System.out.println("Желтый");}
-
-
     }
 
 }

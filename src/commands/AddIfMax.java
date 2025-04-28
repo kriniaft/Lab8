@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class AddIfMax extends Command {
    private AddIfMax(){
-        super("add_if_max {element}");
+        super("add_if_max");
    }
 
       @Override
