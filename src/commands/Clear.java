@@ -10,6 +10,8 @@ public class Clear extends Command {
         super("clear");
     }
 
+
+
     @Override
     public String getHelp(){
         return "Очищает коллекцию (удаляет все элементы)";

@@ -46,7 +46,7 @@ public class FieldsWork {
                     }
 
                     return new Coordinates(x, y);
-                } catch(NumberFormatException e){
+                } catch (NumberFormatException e) {
                     System.out.println("Укажите данные корректно:");
                 } catch (NullException exc) {
                     System.out.println("Ошибка. Попробуйте ещё раз");
@@ -67,9 +67,9 @@ public class FieldsWork {
                         throw new NullException("Вы ничего не ввели. Попробуйте ещё раз");
                     }
                     return h;
-                }catch(NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     System.out.println("Некорректное значение. Повторите попытку");
-                }catch(NullException exc) {
+                } catch (NullException exc) {
                     System.out.println("Ошибка. Попробуйте снова");
                 }
             }
@@ -98,9 +98,9 @@ public class FieldsWork {
         public Color color() throws IllegalArgumentException {
             while(true) {
                 try {
-                    System.out.println("Ввудите Цвет волос, наиболее близкий к одному из перечисленных:\n RED, BLUE, YELLOW, WHITE");
+                    System.out.println("Введите Цвет волос, наиболее близкий к одному из перечисленных:\n RED, BLUE, YELLOW, WHITE");
                     Scanner sc6 = new Scanner(System.in);
-                    Color color = Color.valueOf(sc6.nextLine());
+                    Color color = Color.valueOf(sc6.nextLine().toUpperCase());
                     if ((color == Color.BLUE) || (color == Color.YELLOW) || (color == Color.RED) || (color == Color.WHITE)) {
                         return color;
                     }else{
@@ -156,10 +156,10 @@ public class FieldsWork {
                     }
 
                     return new Location(x, y, z);
-                } catch (NumberFormatException e) {
-                    System.out.println("Укажите данные корректно:");
-                } catch (NullException exc) {
-                    System.out.println("Ошибка. Попробуйте ещё раз");
+                } catch (NumberFormatException exc) {
+                    System.out.println("Вы ввели некорректные данные(");
+                } catch (NullException ex) {
+                    System.out.println("Вы ничего не ввели. Попробуйте снова");
                 }
             }
         }
