@@ -1,4 +1,12 @@
 package commands;
+import commands.base.*;
+public class Exit extends Command {
+    private Exit(){
+        super("exit");
+    }
 
-public class Exit {
+    @Override
+    public String getHelp(){
+        return "завершить программу (без сохранения в файл)";
+    }
 }
