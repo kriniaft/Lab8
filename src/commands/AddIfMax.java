@@ -2,6 +2,7 @@ package commands;
 
 import basic.Person;
 import commands.base.*;
+
 import java.util.HashMap;
 
 public class AddIfMax extends Command {

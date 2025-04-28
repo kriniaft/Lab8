@@ -2,6 +2,8 @@ package commands;
 import commands.base.*;
 import java.util.HashMap;
 
+import java.util.HashMap;
+
 public class RemoveGreater extends Command{
     private RemoveGreater(){
         super("remove_greater");

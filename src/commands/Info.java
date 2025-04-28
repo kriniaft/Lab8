@@ -1,6 +1,9 @@
 package commands;
+import basic.Person;
 import commands.base.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayDeque;
 import java.util.HashMap;
 
 public class Info extends Command {
@@ -10,6 +13,18 @@ public class Info extends Command {
 
     @Override
     public void execute(Environment env) {
+        ArrayDeque<Person> profiles = env.getProfiles();
+        LocalDateTime initializationDate = env.getCollectionInitializationDate();
+
+        if (profiles == null) {
+            System.out.println("  Статус: Коллекция не инициализирована.");
+            return;
+        }
+        System.out.println("  Тип коллекции: " + profiles.getClass().getSimpleName());
+        System.out.println(" Дата инициализации: " + initializationDate != null ? initializationDate.toString() : "не определена");
+        System.out.println("  Количество элементов: " + profiles.size());
+
+
 
     }
 
