@@ -23,6 +23,7 @@ public class Clear extends Command {
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         Clear clear = new Clear();
         stringCommandHashMap.put(clear.getName(), clear);
+    }
 
 
 }

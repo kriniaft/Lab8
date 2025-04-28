@@ -16,4 +16,5 @@ public class Exit extends Command {
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         Exit exit = new Exit();
         stringCommandHashMap.put(exit.getName(), exit);
+    }
 }

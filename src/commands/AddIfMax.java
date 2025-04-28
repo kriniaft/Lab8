@@ -17,6 +17,7 @@ public class AddIfMax extends Command {
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         AddIfMax addIfMax = new AddIfMax();
         stringCommandHashMap.put(addIfMax.getName(), addIfMax);
+    }
 
 
 }

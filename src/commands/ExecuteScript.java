@@ -16,4 +16,5 @@ public class ExecuteScript extends Command{
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         ExecuteScript executeScript = new ExecuteScript();
         stringCommandHashMap.put(executeScript.getName(), executeScript);
+    }
 }
