@@ -1,12 +1,14 @@
 package commands;
 
 import basic.*;
+import commands.base.Command;
+import commands.base.Environment;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
-public class Show extends Command{
-    public Show(){
+public class Show extends Command {
+    private Show(){
         super("show");
     }
 

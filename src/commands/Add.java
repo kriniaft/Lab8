@@ -1,13 +1,14 @@
 package commands;
  import basic.*;
+ import commands.base.Command;
+ import commands.base.Environment;
 
  import java.util.HashMap;
- import java.util.Scanner;
  import java.util.ArrayDeque;
 
 
 public class Add extends Command {
-   public Add() {
+   private Add() {
        super("add");
    }
 

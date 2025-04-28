@@ -1,6 +1,7 @@
-package commands;
+package commands.base;
 
 import basic.Person;
+import commands.NullException;
 
 import java.util.ArrayDeque;
 
