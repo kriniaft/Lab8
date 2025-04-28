@@ -98,7 +98,7 @@ public class FieldsWork {
         public Color color() throws IllegalArgumentException {
             while(true) {
                 try {
-                    System.out.println("Введите Цвет волос, наиболее близкий к одному из перечисленных:\n RED, BLUE, YELLOW, WHITE");
+                    System.out.println("Введите цвет волос, наиболее близкий к одному из перечисленных:\n RED, BLUE, YELLOW, WHITE");
                     Scanner sc6 = new Scanner(System.in);
                     Color color = Color.valueOf(sc6.nextLine().toUpperCase());
                     if ((color == Color.BLUE) || (color == Color.YELLOW) || (color == Color.RED) || (color == Color.WHITE)) {
