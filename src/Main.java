@@ -20,7 +20,7 @@ public class Main{
         Show.register(map);
 
 
-        Environment environment = new Environment(map);
+        Environment environment = new Environment(map, null);
 
         while (in.hasNextLine()) {
             String line = in.nextLine();

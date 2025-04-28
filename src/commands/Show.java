@@ -18,8 +18,8 @@ public class Show extends Command {
     }
 
     @Override
-    public void execute(ArrayDeque<Person> arDeq) throws NullException{
-      System.out.println(arDeq);
+    public void execute(Environment env) throws NullException{
+      System.out.println(env.profiles);
     }
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {
