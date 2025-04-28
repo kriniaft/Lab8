@@ -1,10 +1,7 @@
 package commands;
 
-import basic.Person;
 import commands.base.Command;
 import commands.base.Environment;
-
-import java.util.ArrayDeque;
 import java.util.HashMap;
 
 public class RemoveHead extends Command {
@@ -18,8 +15,8 @@ public class RemoveHead extends Command {
     }
 
     @Override
-    public void execute (ArrayDeque<Person> arDeq){
-        arDeq.poll();
+    public void execute (Environment env){
+        env.profiles.poll();
     }
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {
