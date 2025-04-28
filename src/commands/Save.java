@@ -7,7 +7,7 @@ import java.io.*;
         import java.util.ArrayDeque;
 
 class Save extends Command {
-    Save(){
+    private Save(){
         super("save");
     }
 

@@ -1,4 +1,13 @@
 package commands;
+import commands.base.*;
+public class CountBySameHeight extends Command{
+    private CountBySameHeight(){
+        super("count_by_height");
+    }
 
-public class CountBySameHeight {
+    @Override
+    public String getHelp(){
+        return "Выводит количество людей, рост которых равен заданному";
+    }
+
 }
