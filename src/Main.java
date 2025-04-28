@@ -18,6 +18,7 @@ public class Main{
         HashMap<String, Command> map = new HashMap<>();
         Add.register(map);
         Show.register(map);
+        Help.register(map);
 
 
         Environment environment = new Environment(map, null);
@@ -26,7 +27,7 @@ public class Main{
             String line = in.nextLine();
             if (map.keySet().contains(line)) {
                 Command command = map.get(line);
-                command.execute();
+                command.execute(Environment env);
             } else {
                 System.err.println("Такой команды не существует, введите другую");
             }

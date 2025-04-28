@@ -1,5 +1,9 @@
 package commands;
 
+import basic.Person;
+
+import java.util.ArrayDeque;
+import java.util.HashMap;
 import commands.base.Command;
 import commands.base.Environment;
 import java.util.HashMap;
@@ -24,5 +28,7 @@ public class RemoveHead extends Command {
         stringCommandHashMap.put(removeHead.getName(), removeHead);
 
     }
+
+
 
 }
