@@ -24,6 +24,9 @@ public class Main{
         Exit.register(map);
         Help.register(map);
         Info.register(map);
+        PrintUniqueHair.register(map);
+        RemoveByID.register(map);
+        RemoveByPassport.register(map);
         RemoveGreater.register(map);
         Save.register(map);
         Show.register(map);
