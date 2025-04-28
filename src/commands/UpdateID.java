@@ -10,21 +10,21 @@ public class UpdateID extends Command {
         super("update id {element}");
     }
 
-        @Override
-        public void execute(ArrayDeque<Person> arDeq) throws NullException {
-            arDeq.poll();
-        }
+    @Override
+    public void execute(ArrayDeque<Person> arDeq) throws NullException {
+        arDeq.poll();
+    }
 
 
-        @Override
-        public String getHelp(){
-            return "Обновить значение элемента коллекции, id которого вы ввели";
-        }
+    @Override
+    public String getHelp(){
+        return "Обновить значение элемента коллекции, id которого вы ввели";
+    }
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         UpdateID updateID = new UpdateID();
         stringCommandHashMap.put(updateID.getName(), updateID);
 
     }
-    }
+}
 }

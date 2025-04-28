@@ -4,7 +4,8 @@ import commands.base.Command;
 import commands.base.Environment;
 
 import java.io.*;
-        import java.util.ArrayDeque;
+import java.util.ArrayDeque;
+import java.util.HashMap;
 
 class Save extends Command {
     private Save(){
@@ -25,5 +26,9 @@ class Save extends Command {
         return "сохраняет коллекцию в файл";
     }
 
-}
+    public static void register(HashMap<String, Command> stringCommandHashMap) {
+        Save save = new Save();
+        stringCommandHashMap.put(save.getName(), save);
+    }
 
+}
