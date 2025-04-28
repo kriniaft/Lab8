@@ -8,9 +8,16 @@ public class RemoveByID extends Command{
         super("remove_by_id");
     }
 
+    public void execute(Environment env){
+        FieldsWork fw = new FieldsWork();
+
+
+    }
+
     public String getHelp(){
         return "удалить элемент из коллекции по его id";
     }
+
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         RemoveByID rbi = new RemoveByID();
