@@ -164,6 +164,26 @@ public class FieldsWork {
             }
         }
 
+    public long id() throws NullException {
+        System.out.println("Введите ID:");
+        while(true) {
+            Scanner sc11 = new Scanner(System.in);
+            String id = sc11.nextLine();
+            try {
+                long h = Long.parseLong(id);
+                if(h <= 0){throw new NumberFormatException();}
+                if (id.isEmpty()) {
+                    throw new NullException("Вы ничего не ввели, попробуйте еще раз.");
+                }
+                return id();
+            } catch (NumberFormatException exc) {
+                System.out.println("Вы ввели некорректные данные(");
+            } catch (NullException ex) {
+                System.out.println("Вы ничего не ввели. Попробуйте снова");
+            }
+        }
+    }
+
     }
 
 
