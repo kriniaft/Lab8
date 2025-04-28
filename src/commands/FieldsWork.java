@@ -55,7 +55,7 @@ public class FieldsWork {
         }
 
 
-        public float height()  {
+        public Float height()  {
             System.out.println("Введите рост в метрах:");
             while(true) {
                 Scanner sc4 = new Scanner(System.in);
