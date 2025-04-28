@@ -3,6 +3,8 @@ package commands;
 import commands.base.Command;
 import commands.base.Environment;
 
+import java.util.HashMap;
+
 public class Clear extends Command {
     private Clear(){
         super("clear");
@@ -17,6 +19,10 @@ public class Clear extends Command {
     public void execute(Environment env){
         env.profiles.clear();
     }
+
+    public static void register(HashMap<String, Command> stringCommandHashMap) {
+        Clear clear = new Clear();
+        stringCommandHashMap.put(clear.getName(), clear);
 
 
 }

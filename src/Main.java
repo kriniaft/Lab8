@@ -17,8 +17,18 @@ public class Main{
 
         HashMap<String, Command> map = new HashMap<>();
         Add.register(map);
-        Show.register(map);
+        AddIfMax.register(map);
+        Clear.register(map);
+        CountBySameHeight.register(map);
+        ExecuteScript.register(map);
+        Exit.register(map);
         Help.register(map);
+        Info.register(map);
+        RemoveGreater.register(map);
+        Save.register(map);
+        Show.register(map);
+        UpdateID.register(map);
+
 
 
         Environment environment = new Environment(map, null);
@@ -27,7 +37,7 @@ public class Main{
             String line = in.nextLine();
             if (map.keySet().contains(line)) {
                 Command command = map.get(line);
-                command.execute(Environment env);
+                command.execute(environment);
             } else {
                 System.err.println("Такой команды не существует, введите другую");
             }

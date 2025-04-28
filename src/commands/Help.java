@@ -10,10 +10,6 @@ public class Help extends Command {
         super("help");
     }
 
-    public String getHelp() {
-        return "Выводит список всех команд";
-    }
-
     public void execute(Environment env) {
         HashMap<String, Command> stringCommandHashMap = env.getStringCommandHashmap();
         stringCommandHashMap.forEach((key, value) -> {
@@ -22,9 +18,16 @@ public class Help extends Command {
 
     }
 
-
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         Help help = new Help();
         stringCommandHashMap.put(help.getName(), help);
     }
+
+
+    public String getHelp(){
+        return "Выводит список всех команд";
+    }
+
+
+
 }
