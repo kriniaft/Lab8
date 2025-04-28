@@ -16,6 +16,6 @@ public abstract class Command {
         return name;
     }
 
-    public abstract void execute(ArrayDeque<Person> arDeq) throws NullException;
+    public abstract void execute(Environment environment) throws NullException;
     public abstract String getHelp();
 }
