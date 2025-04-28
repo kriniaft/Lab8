@@ -18,6 +18,7 @@ public class Main{
         HashMap<String, Command> map = new HashMap<>();
         Add.register(map);
         Show.register(map);
+        Help.register(map);
 
 
         Environment environment = new Environment(map, null);

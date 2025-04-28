@@ -1,9 +1,11 @@
 package commands;
 import basic.*;
+import commands.base.Command;
+
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
-public class UpdateID extends Command{
+public class UpdateID extends Command {
     private UpdateID() {
         super("update id {element}");
     }

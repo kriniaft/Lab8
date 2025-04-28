@@ -13,11 +13,11 @@ public class Add extends Command {
    }
 
    @Override
-   public void execute(ArrayDeque<Person> arDeq) throws NullException {
+   public void execute(Environment env) throws NullException {
        FieldsWork fw = new FieldsWork();
        Person person = new Person(fw.name(), fw.coordinates(), fw.height(),
                fw.passport(), fw.color(), fw.country(), fw.location());
-       arDeq.offerLast(person);
+       env.profiles.offerLast(person);
    }
 
    @Override

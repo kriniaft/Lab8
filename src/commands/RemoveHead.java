@@ -29,10 +29,6 @@ public class RemoveHead extends Command {
 
     }
 
-    public static void register(HashMap<String, Command> stringCommandHashMap) {
-        RemoveHead removeHead = new RemoveHead();
-        stringCommandHashMap.put(removeHead.getName(), removeHead);
 
-    }
 
 }
