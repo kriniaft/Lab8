@@ -30,5 +30,4 @@ public class Add extends Command {
        stringCommandHashMap.put(add.getName(), add);
    }
 
-
 }
