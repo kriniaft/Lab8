@@ -16,8 +16,8 @@ public class Add extends Command {
    @Override
    public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
        FieldsWork fw = new FieldsWork();
-       Person person = new Person(fw.name(), fw.coordinates(), fw.height(),
-               fw.passport(), fw.color(), fw.country(), fw.location());
+       Person person = new Person(fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut),
+               fw.passport(sIn, sOut), fw.color(sIn, sOut), fw.country(sIn, sOut), fw.location(sIn, sOut));
        env.profiles.offerLast(person);
        sOut.println("Новый человек успешно добавлен");
    }
