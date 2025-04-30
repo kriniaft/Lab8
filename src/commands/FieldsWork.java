@@ -36,6 +36,9 @@ public class FieldsWork {
                     if (xInput.isEmpty()) {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
                     }
+                    if (x >= 947) {
+                        throw new NullException("Неверный ввод, X не более 946");
+                    }
 
                     System.out.println("Введите координату по Y:");
                     Scanner sc3 = new Scanner(System.in);
@@ -82,7 +85,7 @@ public class FieldsWork {
                 String passport = sc5.nextLine();
                 try {
                     long h = Long.parseLong(passport);
-                    if(h <= 0){throw new NumberFormatException();}
+                    if(h <= 0 || h >= 999999999){throw new NumberFormatException();}
                     if (passport.isEmpty()) {
                         throw new NullException("Вы ничего не ввели, попробуйте еще раз.");
                     }
@@ -116,7 +119,7 @@ public class FieldsWork {
                 try {
                     System.out.println("Введите страну проживания:\n USA, GERMANY, SPAIN, CHINA");
                     Scanner sc7 = new Scanner(System.in);
-                    Country country = Country.valueOf(sc7.nextLine());
+                    Country country = Country.valueOf(sc7.nextLine().toUpperCase());
                     if ((country == Country.CHINA) || (country == Country.USA) || (country == Country.GERMANY) || (country == Country.SPAIN)) {
                         return country;
                     }else{
@@ -138,9 +141,7 @@ public class FieldsWork {
                     if (xInput.isEmpty()) {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
                     }
-                    if (x >= 947) {
-                        throw new IllegalArgumentException("Неверный ввод, X не более 946");
-                    }
+
 
                     System.out.println("По Y");
                     Scanner sc9 = new Scanner(System.in);
