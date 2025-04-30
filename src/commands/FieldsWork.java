@@ -87,7 +87,7 @@ public class FieldsWork {
                 String passport = sc5.nextLine();
                 try {
                     long h = Long.parseLong(passport);
-                    if(h <= 0){throw new NumberFormatException();}
+                    if(h <= 0 || h >= 999999999){throw new NumberFormatException();}
                     if (passport.isEmpty()) {
                         throw new NullException("Вы ничего не ввели, попробуйте еще раз.");
                     }
