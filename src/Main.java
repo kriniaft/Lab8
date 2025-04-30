@@ -23,7 +23,6 @@ public class Main{
         AddIfMax.register(map);
         Clear.register(map);
         CountBySameHeight.register(map);
-        ExecuteScript.register(map);
         Exit.register(map);
         Help.register(map);
         Info.register(map);
@@ -33,7 +32,6 @@ public class Main{
         RemoveGreater.register(map);
         Show.register(map);
         UpdateID.register(map);
-
         comcontr.command(environment);
     }
 }
