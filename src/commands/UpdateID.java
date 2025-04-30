@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 public class UpdateID extends Command {
     private UpdateID() {
-        super("update id {element}");
+        super("update id");
     }
 
     @Override
@@ -14,16 +14,23 @@ public class UpdateID extends Command {
         Iterator<Person> iterator = env.profiles.iterator();
         FieldsWork fw = new FieldsWork();
         long id = fw.id();
+        boolean found = false;
+
         while (iterator.hasNext()) {
             Person person = iterator.next();
             if (person.getId() == id) {
                 float height = fw.height();
                 person.setHeight(height);
                 System.out.println("Рост успешно изменен");
-            }else {
-                System.out.println("Не удалось изменить рост");
+                found = true;
+                break;
             }
         }
+
+        if(!found) {
+            System.out.println("Не удалось изменить рост");
+        }
+
         System.out.println("Процесс удаления по росту выполнен");
     }
 

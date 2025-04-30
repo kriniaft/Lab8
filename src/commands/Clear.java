@@ -20,6 +20,7 @@ public class Clear extends Command {
     @Override
     public void execute(Environment env){
         env.profiles.clear();
+        System.out.println("Коллекция очищена");
     }
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {

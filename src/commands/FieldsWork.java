@@ -36,6 +36,9 @@ public class FieldsWork {
                     if (xInput.isEmpty()) {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
                     }
+                    if (x >= 947) {
+                        throw new IllegalArgumentException("Неверный ввод, X не более 946");
+                    }
 
                     System.out.println("Введите координату по Y:");
                     Scanner sc3 = new Scanner(System.in);
@@ -50,6 +53,8 @@ public class FieldsWork {
                     System.out.println("Укажите данные корректно:");
                 } catch (NullException exc) {
                     System.out.println("Ошибка. Попробуйте ещё раз");
+                }catch(IllegalArgumentException e){
+                    System.out.println("Неверный ввод, X не более 946");
                 }
             }
         }
@@ -116,7 +121,7 @@ public class FieldsWork {
                 try {
                     System.out.println("Введите страну проживания:\n USA, GERMANY, SPAIN, CHINA");
                     Scanner sc7 = new Scanner(System.in);
-                    Country country = Country.valueOf(sc7.nextLine());
+                    Country country = Country.valueOf(sc7.nextLine().toUpperCase());
                     if ((country == Country.CHINA) || (country == Country.USA) || (country == Country.GERMANY) || (country == Country.SPAIN)) {
                         return country;
                     }else{
@@ -137,9 +142,6 @@ public class FieldsWork {
                     Float x = Float.parseFloat(xInput);
                     if (xInput.isEmpty()) {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
-                    }
-                    if (x >= 947) {
-                        throw new IllegalArgumentException("Неверный ввод, X не более 946");
                     }
 
                     System.out.println("По Y");

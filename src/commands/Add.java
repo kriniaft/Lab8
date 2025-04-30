@@ -18,6 +18,7 @@ public class Add extends Command {
        Person person = new Person(fw.name(), fw.coordinates(), fw.height(),
                fw.passport(), fw.color(), fw.country(), fw.location());
        env.profiles.offerLast(person);
+       System.out.println("Новый человек успешно добавлен");
    }
 
    @Override
