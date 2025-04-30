@@ -1,6 +1,9 @@
 package commands;
 import basic.Person;
 import commands.base.*;
+
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 import java.util.HashMap;
@@ -20,7 +23,7 @@ public class RemoveGreater extends Command{
         stringCommandHashMap.put(removeGreater.getName(), removeGreater);
     }
 
-    public void execute(Environment env){
+    public void execute(Environment env, InputStream sIn, PrintStream sOut){
         Iterator<Person> iterator = env.profiles.iterator();
         FieldsWork fw = new FieldsWork();
         float maxHeight = fw.height();
@@ -30,6 +33,6 @@ public class RemoveGreater extends Command{
                 iterator.remove();
             }
         }
-        System.out.println("Процесс удаления по росту выполнен");
+        sOut.println("Процесс удаления по росту выполнен");
     }
 }

@@ -1,20 +1,22 @@
 package commands;
 import commands.base.*;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class RemoveByPassport extends Command{
     private RemoveByPassport(){
-        super("remove_any_by_passport_i_d");
+        super("remove_any_by_passport_id");
     }
 
-    public void execute(Environment env) throws NullException {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
         FieldsWork fw = new FieldsWork();
         String pID = fw.passport();
 
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
-            System.out.println("Коллекция пуста или не инициализирована");
+            sOut.println("Коллекция пуста или не инициализирована");
             return;
         }
 
@@ -30,9 +32,9 @@ public class RemoveByPassport extends Command{
         }
 
         if (removed) {
-            System.out.println("Человек с паспортным ID '" + pID + "' успешно удален.");
+            sOut.println("Человек с паспортным ID '" + pID + "' успешно удален.");
         } else {
-            System.out.println("Человек с паспортным ID '" + pID + "' не найден в коллекции.");
+            sOut.println("Человек с паспортным ID '" + pID + "' не найден в коллекции.");
         }
     }
 

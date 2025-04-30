@@ -1,6 +1,9 @@
 package commands;
 import basic.*;
 import commands.base.*;
+
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -10,7 +13,7 @@ public class UpdateID extends Command {
     }
 
     @Override
-    public void execute(Environment env) throws NullException {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
         Iterator<Person> iterator = env.profiles.iterator();
         FieldsWork fw = new FieldsWork();
         long id = fw.id();
@@ -21,14 +24,14 @@ public class UpdateID extends Command {
             if (person.getId() == id) {
                 float height = fw.height();
                 person.setHeight(height);
-                System.out.println("Рост успешно изменен");
+                sOut.println("Рост успешно изменен");
                 found = true;
                 break;
             }
         }
 
         if(!found) {
-            System.out.println("Не удалось изменить рост по введенному id");
+            sOut.println("Не удалось изменить рост по введенному id");
         }
     }
 

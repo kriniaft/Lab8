@@ -4,6 +4,8 @@ import basic.Color;
 import commands.base.Command;
 import commands.base.Environment;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 public class PrintUniqueHair extends Command {
@@ -22,18 +24,18 @@ public class PrintUniqueHair extends Command {
     }
 
     @Override
-    public void execute(Environment env) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut) {
         long countGreen = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.GREEN).count();
         long countBlue = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.BLUE).count();
         long countRed = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.RED).count();
         long countWhite = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.WHITE).count();
         long countYellow = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.YELLOW).count();
-        System.out.println("В исходной коллекции встречаются люди с таким цветом волос, как:");
-        if(countGreen > 0){ System.out.println("Зелёный");}
-        if(countBlue > 0){ System.out.println("Синий");}
-        if(countRed > 0){ System.out.println("Красный");}
-        if(countWhite > 0){ System.out.println("Белый");}
-        if(countYellow > 0){ System.out.println("Желтый");}
+        sOut.println("В исходной коллекции встречаются люди с таким цветом волос, как:");
+        if(countGreen > 0){ sOut.println("Зелёный");}
+        if(countBlue > 0){ sOut.println("Синий");}
+        if(countRed > 0){ sOut.println("Красный");}
+        if(countWhite > 0){ sOut.println("Белый");}
+        if(countYellow > 0){ sOut.println("Желтый");}
     }
 
 }
