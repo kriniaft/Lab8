@@ -3,6 +3,8 @@ package commands;
 import basic.Person;
 import commands.base.*;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 public class AddIfMax extends Command {
@@ -16,16 +18,16 @@ public class AddIfMax extends Command {
       }
 
       @Override
-      public void execute(Environment env) throws NullException {
+      public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
         FieldsWork fw = new FieldsWork();
         float h = fw.height();
         boolean isMax = env.profiles.stream().allMatch(p -> h > p.getHeight());
           if(isMax){
             Person person = new Person(fw.name(), fw.coordinates(), fw.height(), fw.passport(), fw.color(), fw.country(), fw.location());
             env.profiles.add(person);
-            System.out.println("Новый человек успешно добавлен");
+            sOut.println("Новый человек успешно добавлен");
           }else{
-            System.out.println("О нет, кажется уже есть люди с бОльшим ростом");
+            sOut.println("О нет, кажется уже есть люди с бОльшим ростом");
           }
       }
 
