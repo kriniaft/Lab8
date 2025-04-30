@@ -36,15 +36,6 @@ public class RemoveByPassport extends Command{
         }
     }
 
-
-
-
-
-
-
-
-
-
     public String getHelp(){
         return "удаляет из коллекции элемент с таким же номером паспорта";
     }
