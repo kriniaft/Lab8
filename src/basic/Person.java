@@ -31,10 +31,8 @@ public class Person {
 
 
     public void setName(String n){
-        if(name != null && !name.isEmpty()){
-            name = n;
-        } else {
-            throw new IllegalArgumentException("Некорректное имя");}
+        if(n != null && !n.isEmpty()){
+        name = n;} else { throw new IllegalArgumentException("Некорректное имя");}
     }
 
     public String getName(){

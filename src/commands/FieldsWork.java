@@ -37,7 +37,7 @@ public class FieldsWork {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
                     }
                     if (x >= 947) {
-                        throw new NullException("Неверный ввод, X не более 946");
+                        throw new IllegalArgumentException("Неверный ввод, X не более 946");
                     }
 
                     System.out.println("Введите координату по Y:");
@@ -53,6 +53,8 @@ public class FieldsWork {
                     System.out.println("Укажите данные корректно:");
                 } catch (NullException exc) {
                     System.out.println("Ошибка. Попробуйте ещё раз");
+                }catch(IllegalArgumentException e){
+                    System.out.println("Неверный ввод, X не более 946");
                 }
             }
         }
