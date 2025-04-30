@@ -53,8 +53,6 @@ public class FieldsWork {
                     System.out.println("Укажите данные корректно:");
                 } catch (NullException exc) {
                     System.out.println("Ошибка. Попробуйте ещё раз");
-                }catch(IllegalArgumentException e){
-                    System.out.println("Неверный ввод, X не более 946");
                 }
             }
         }

@@ -8,11 +8,6 @@ public class ExecuteScript extends Command{
         super("execute_script");
     }
 
-    @Override
-    public void execute(Environment env) {
-
-    }
-
 
     @Override
     public String getHelp(){

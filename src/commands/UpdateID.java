@@ -28,10 +28,8 @@ public class UpdateID extends Command {
         }
 
         if(!found) {
-            System.out.println("Не удалось изменить рост");
+            System.out.println("Не удалось изменить рост по введенному id");
         }
-
-        System.out.println("Процесс удаления по росту выполнен");
     }
 
 

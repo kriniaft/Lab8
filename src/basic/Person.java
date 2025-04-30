@@ -1,10 +1,11 @@
 package basic;
+import java.time.ZonedDateTime;
 import java.util.Random;
 public class Person {
     private final long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name;
     private Coordinates coordinates;
-    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private final java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Float height;
     private String passportID;
     private Color hairColor;
@@ -20,6 +21,7 @@ public class Person {
         setHairColor(hc);
         setNationality(nt);
         setLocation(l);
+        creationDate = ZonedDateTime.now(nt.getZoneId());
         Random random = new Random();
         id = random.nextLong(1000);
     }
