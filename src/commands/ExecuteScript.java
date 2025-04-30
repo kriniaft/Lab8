@@ -4,10 +4,14 @@ import commands.base.*;
 import java.util.HashMap;
 
 public class ExecuteScript extends Command{
-    private ExecuteScript(){
+    private ExecuteScript() {
         super("execute_script");
     }
 
+    @Override
+    public void execute(Environment env) {
+
+    }
 
 
     @Override

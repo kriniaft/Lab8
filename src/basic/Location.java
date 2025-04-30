@@ -6,9 +6,15 @@ public class Location {
     private Float z; //Поле не может быть null
 
     public Location(Float x, float y, Float z){
-        if(x != null ) {this.x = x;} else{ throw new IllegalArgumentException("Некорректный ввод");}
+        if(x != null ) {
+            this.x = x;
+        } else{
+            throw new IllegalArgumentException("Некорректный ввод");}
         this.y = y;
-        if(z != null) {this.z = z;} else{ throw new IllegalArgumentException("Некорректный ввод");}
+        if(z != null) {
+            this.z = z;
+        } else{
+            throw new IllegalArgumentException("Некорректный ввод");}
     }
 
     public void setX(Float x){
@@ -23,7 +29,7 @@ public class Location {
         this.y = y;
     }
 
-    public Float getY(){
+    public float getY(){
         return y;
     }
     public void setZ(Float z){

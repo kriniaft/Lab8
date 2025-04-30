@@ -81,7 +81,7 @@ public class FieldsWork {
                 Scanner sc5 = new Scanner(System.in);
                 String passport = sc5.nextLine();
                 try {
-                    int h = Integer.parseInt(passport);
+                    long h = Long.parseLong(passport);
                     if(h <= 0){throw new NumberFormatException();}
                     if (passport.isEmpty()) {
                         throw new NullException("Вы ничего не ввели, попробуйте еще раз.");
@@ -137,6 +137,9 @@ public class FieldsWork {
                     Float x = Float.parseFloat(xInput);
                     if (xInput.isEmpty()) {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
+                    }
+                    if (x >= 947) {
+                        throw new IllegalArgumentException("Неверный ввод, X не более 946");
                     }
 
                     System.out.println("По Y");
