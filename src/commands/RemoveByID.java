@@ -14,7 +14,7 @@ public class RemoveByID extends Command {
 
     public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException{
         FieldsWork fw = new FieldsWork();
-        long nID = fw.id();
+        long nID = fw.id(sIn, sOut);
 
 
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {

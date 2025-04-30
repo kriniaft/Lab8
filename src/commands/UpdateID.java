@@ -16,13 +16,13 @@ public class UpdateID extends Command {
     public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
         Iterator<Person> iterator = env.profiles.iterator();
         FieldsWork fw = new FieldsWork();
-        long id = fw.id();
+        long id = fw.id(sIn, sOut);
         boolean found = false;
 
         while (iterator.hasNext()) {
             Person person = iterator.next();
             if (person.getId() == id) {
-                float height = fw.height();
+                float height = fw.height(sIn, sOut);
                 person.setHeight(height);
                 sOut.println("Рост успешно изменен");
                 found = true;

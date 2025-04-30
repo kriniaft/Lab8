@@ -15,7 +15,7 @@ public class RemoveGreater extends Command{
     }
     @Override
     public String getHelp(){
-        return "удаляет из коллекции все элементы, превышающие заданный";
+        return "удаляет из коллекции все элементы, прsевышающие заданный";
     }
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {
@@ -26,7 +26,7 @@ public class RemoveGreater extends Command{
     public void execute(Environment env, InputStream sIn, PrintStream sOut){
         Iterator<Person> iterator = env.profiles.iterator();
         FieldsWork fw = new FieldsWork();
-        float maxHeight = fw.height();
+        float maxHeight = fw.height(sIn, sOut);
         while (iterator.hasNext()) {
             Person person = iterator.next();
             if (person.getHeight() > maxHeight) {

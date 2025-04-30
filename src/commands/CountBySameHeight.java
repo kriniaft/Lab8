@@ -15,7 +15,7 @@ public class CountBySameHeight extends Command{
     @Override
     public void execute(Environment env, InputStream sIn, PrintStream sOut) {
         FieldsWork fw = new FieldsWork();
-        float targetHeight = fw.height();
+        float targetHeight = fw.height(sIn, sOut);
 
         if (env.getProfiles() == null) {
             sOut.println("Ошибка: коллекция профилей не инициализирована.");

@@ -13,7 +13,7 @@ public class RemoveByPassport extends Command{
 
     public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
         FieldsWork fw = new FieldsWork();
-        String pID = fw.passport();
+        String pID = fw.passport(sIn, sOut);
 
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
             sOut.println("Коллекция пуста или не инициализирована");
