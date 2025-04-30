@@ -3,8 +3,9 @@ package commands;
  import commands.base.Command;
  import commands.base.Environment;
 
+ import java.io.InputStream;
+ import java.io.PrintStream;
  import java.util.HashMap;
- import java.util.ArrayDeque;
 
 
 public class Add extends Command {
@@ -13,12 +14,12 @@ public class Add extends Command {
    }
 
    @Override
-   public void execute(Environment env) throws NullException {
+   public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
        FieldsWork fw = new FieldsWork();
        Person person = new Person(fw.name(), fw.coordinates(), fw.height(),
                fw.passport(), fw.color(), fw.country(), fw.location());
        env.profiles.offerLast(person);
-       System.out.println("Новый человек успешно добавлен");
+       sOut.println("Новый человек успешно добавлен");
    }
 
    @Override

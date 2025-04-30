@@ -1,6 +1,8 @@
 package commands;
 import commands.base.*;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 
@@ -11,19 +13,19 @@ public class CountBySameHeight extends Command{
 
 
     @Override
-    public void execute(Environment env) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut) {
         FieldsWork fw = new FieldsWork();
         float targetHeight = fw.height();
 
         if (env.getProfiles() == null) {
-            System.out.println("Ошибка: коллекция профилей не инициализирована.");
+            sOut.println("Ошибка: коллекция профилей не инициализирована.");
             return;
         }
 
         long count = env.getProfiles().stream()
                 .filter(person -> person.getHeight() == targetHeight)
                 .count();
-        System.out.println("Количество людей с ростом " + targetHeight + ": " + count);
+        sOut.println("Количество людей с ростом " + targetHeight + ": " + count);
 
     }
 

@@ -1,12 +1,14 @@
 package commands;
 import basic.*;
 import javax.naming.InvalidNameException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class FieldsWork {
 
-        public String name()  {
-            System.out.println("Введите Имя:");
+        public String name(InputStream sIn, PrintStream sOut)  {
+            sOut.println("Введите Имя:");
             String name;
             while (true) {
                 Scanner sc1 = new Scanner(System.in);
@@ -20,16 +22,16 @@ public class FieldsWork {
                     }
                     break;
                 } catch (InvalidNameException e) {
-                    System.out.println("Некорректный ввод, попробуйте еще раз!");
+                    sOut.println("Некорректный ввод, попробуйте еще раз!");
                 }
             }
             return name;
         }
 
-        public Coordinates coordinates() throws NullException {
+        public Coordinates coordinates(InputStream sIn, PrintStream sOut) throws NullException {
             while(true) {
                 try {
-                    System.out.println("Введите координату по Х:");
+                    sOut.println("Введите координату по Х:");
                     Scanner sc2 = new Scanner(System.in);
                     String xInput = sc2.nextLine();
                     float x = Float.parseFloat(xInput);
@@ -40,7 +42,7 @@ public class FieldsWork {
                         throw new IllegalArgumentException("Неверный ввод, X не более 946");
                     }
 
-                    System.out.println("Введите координату по Y:");
+                    sOut.println("Введите координату по Y:");
                     Scanner sc3 = new Scanner(System.in);
                     String yInput = sc3.nextLine();
                     float y = Float.parseFloat(yInput);
@@ -50,16 +52,18 @@ public class FieldsWork {
 
                     return new Coordinates(x, y);
                 } catch (NumberFormatException e) {
-                    System.out.println("Укажите данные корректно:");
+                    sOut.println("Укажите данные корректно:");
                 } catch (NullException exc) {
-                    System.out.println("Ошибка. Попробуйте ещё раз");
+                    sOut.println("Ошибка. Попробуйте ещё раз");
+                }catch(IllegalArgumentException e){
+                    sOut.println("Неверный ввод, X не более 946");
                 }
             }
         }
 
 
-        public Float height()  {
-            System.out.println("Введите рост в метрах:");
+        public Float height(InputStream sIn, PrintStream sOut)  {
+            sOut.println("Введите рост в метрах:");
             while(true) {
                 Scanner sc4 = new Scanner(System.in);
                 try {
@@ -71,15 +75,15 @@ public class FieldsWork {
                     }
                     return h;
                 } catch (NumberFormatException e) {
-                    System.out.println("Некорректное значение. Повторите попытку");
+                    sOut.println("Некорректное значение. Повторите попытку");
                 } catch (NullException exc) {
-                    System.out.println("Ошибка. Попробуйте снова");
+                    sOut.println("Ошибка. Попробуйте снова");
                 }
             }
         }
 
-        public String passport() throws NullException {
-            System.out.println("Введите серию и номера паспорта без пробелов:");
+        public String passport(InputStream sIn, PrintStream sOut) throws NullException {
+            sOut.println("Введите серию и номера паспорта без пробелов:");
             while(true) {
                 Scanner sc5 = new Scanner(System.in);
                 String passport = sc5.nextLine();
@@ -91,17 +95,17 @@ public class FieldsWork {
                     }
                     return passport;
                 } catch (NumberFormatException exc) {
-                    System.out.println("Вы ввели некорректные данные(");
+                    sOut.println("Вы ввели некорректные данные(");
                 } catch (NullException ex) {
-                    System.out.println("Вы ничего не ввели. Попробуйте снова");
+                    sOut.println("Вы ничего не ввели. Попробуйте снова");
                 }
             }
         }
 
-        public Color color() throws IllegalArgumentException {
+        public Color color(InputStream sIn, PrintStream sOut) throws IllegalArgumentException {
             while(true) {
                 try {
-                    System.out.println("Введите цвет волос, наиболее близкий к одному из перечисленных:\n RED, BLUE, YELLOW, WHITE");
+                    sOut.println("Введите цвет волос, наиболее близкий к одному из перечисленных:\n RED, BLUE, YELLOW, WHITE");
                     Scanner sc6 = new Scanner(System.in);
                     Color color = Color.valueOf(sc6.nextLine().toUpperCase());
                     if ((color == Color.BLUE) || (color == Color.YELLOW) || (color == Color.RED) || (color == Color.WHITE)) {
@@ -109,15 +113,15 @@ public class FieldsWork {
                     }else{
                     throw new IllegalArgumentException();}
                 }catch(IllegalArgumentException e){
-                    System.out.println("Вы должны выбрать из перечисленных");
+                    sOut.println("Вы должны выбрать из перечисленных");
                 }
             }
         }
 
-        public Country country() throws IllegalArgumentException {
+        public Country country(InputStream sIn, PrintStream sOut) throws IllegalArgumentException {
             while(true) {
                 try {
-                    System.out.println("Введите страну проживания:\n USA, GERMANY, SPAIN, CHINA");
+                    sOut.println("Введите страну проживания:\n USA, GERMANY, SPAIN, CHINA");
                     Scanner sc7 = new Scanner(System.in);
                     Country country = Country.valueOf(sc7.nextLine().toUpperCase());
                     if ((country == Country.CHINA) || (country == Country.USA) || (country == Country.GERMANY) || (country == Country.SPAIN)) {
@@ -125,16 +129,17 @@ public class FieldsWork {
                     }else{
                         throw new IllegalArgumentException();}
                 }catch(IllegalArgumentException e){
-                    System.out.println("Вы должны выбрать из перечисленных");
+                    sOut.println("Вы должны выбрать из перечисленных");
                 }
             }
+
         }
 
-        public Location location() throws NullException {
+        public Location location(InputStream sIn, PrintStream sOut) throws NullException {
             while (true) {
                 try {
-                    System.out.println("Введите Расположение:");
-                    System.out.println("По Х");
+                    sOut.println("Введите Расположение:");
+                    sOut.println("По Х");
                     Scanner sc8 = new Scanner(System.in);
                     String xInput = sc8.nextLine();
                     Float x = Float.parseFloat(xInput);
@@ -142,8 +147,7 @@ public class FieldsWork {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
                     }
 
-
-                    System.out.println("По Y");
+                    sOut.println("По Y");
                     Scanner sc9 = new Scanner(System.in);
                     String yInput = sc9.nextLine();
                     float y = Float.parseFloat(yInput);
@@ -151,7 +155,7 @@ public class FieldsWork {
                         throw new NullException("Неверный ввод, попробуйте еще раз");
                     }
 
-                    System.out.println("По Z");
+                    sOut.println("По Z");
                     Scanner sc10 = new Scanner(System.in);
                     String zInput = sc10.nextLine();
                     Float z = Float.parseFloat(zInput);
@@ -161,25 +165,26 @@ public class FieldsWork {
 
                     return new Location(x, y, z);
                 } catch (NumberFormatException exc) {
-                    System.out.println("Вы ввели некорректные данные(");
+                    sOut.println("Вы ввели некорректные данные(");
                 } catch (NullException ex) {
-                    System.out.println("Вы ничего не ввели. Попробуйте снова");
+                    sOut.println("Вы ничего не ввели. Попробуйте снова");
                 }
             }
         }
 
-    public long id() throws NullException {
-        System.out.println("Введите ID:");
+    public long id(InputStream sIn, PrintStream sOut) throws NullException {
+        sOut.println("Введите ID:");
         while(true) {
             Scanner sc11 = new Scanner(System.in);
             String id = sc11.nextLine();
             try {
-                long h = Long.parseLong(id);
-                if(h <= 0){throw new NumberFormatException();}
+
                 if (id.isEmpty()) {
                     throw new NullException("Вы ничего не ввели, попробуйте еще раз.");
                 }
-                return id();
+                long h = Long.parseLong(id);
+                if(h <= 0){throw new NumberFormatException();}
+                return h;
             } catch (NumberFormatException exc) {
                 System.out.println("Вы ввели некорректные данные(");
             } catch (NullException ex) {
@@ -187,7 +192,6 @@ public class FieldsWork {
             }
         }
     }
-
-    }
+}
 
 
