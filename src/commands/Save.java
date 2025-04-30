@@ -7,12 +7,9 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
-class Save extends Command {
-    private Save(){
-        super("save");
-    }
+class Save  {
 
-    @Override
+
     public void execute(ArrayDeque<Person> arDeq, Environment env, String fileName) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
             outputStream.writeObject(arDeq);
@@ -21,14 +18,13 @@ class Save extends Command {
         }
     }
 
-    @Override
+
     public String getHelp(){
         return "сохраняет коллекцию в файл";
     }
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         Save save = new Save();
-        stringCommandHashMap.put(save.getName(), save);
     }
 
 }
