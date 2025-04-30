@@ -175,12 +175,13 @@ public class FieldsWork {
             Scanner sc11 = new Scanner(System.in);
             String id = sc11.nextLine();
             try {
-                long h = Long.parseLong(id);
-                if(h <= 0){throw new NumberFormatException();}
+
                 if (id.isEmpty()) {
                     throw new NullException("Вы ничего не ввели, попробуйте еще раз.");
                 }
-                return id();
+                long h = Long.parseLong(id);
+                if(h <= 0){throw new NumberFormatException();}
+                return h;
             } catch (NumberFormatException exc) {
                 System.out.println("Вы ввели некорректные данные(");
             } catch (NullException ex) {
@@ -188,7 +189,6 @@ public class FieldsWork {
             }
         }
     }
-
-    }
+}
 
 

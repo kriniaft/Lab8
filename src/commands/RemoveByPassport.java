@@ -14,7 +14,7 @@ public class RemoveByPassport extends Command{
         String pID = fw.passport();
 
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
-            System.out.println("Коллекция пуста или не инициализирована.");
+            System.out.println("Коллекция пуста или не инициализирована");
             return;
         }
 
