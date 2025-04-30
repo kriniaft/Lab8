@@ -130,6 +130,7 @@ public class FieldsWork {
                     System.out.println("Вы должны выбрать из перечисленных");
                 }
             }
+
         }
 
         public Location location() throws NullException {
