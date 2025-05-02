@@ -3,6 +3,8 @@ package commands;
 import commands.base.Command;
 import commands.base.Environment;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 public class Help extends Command {
@@ -10,10 +12,10 @@ public class Help extends Command {
         super("help");
     }
 
-    public void execute(Environment env) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut) {
         HashMap<String, Command> stringCommandHashMap = env.getStringCommandHashmap();
         stringCommandHashMap.forEach((key, value) -> {
-            System.out.println(key + ": " + value.getHelp());
+            sOut.println(key + ": " + value.getHelp());
         });
 
     }

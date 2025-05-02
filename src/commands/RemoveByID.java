@@ -2,6 +2,8 @@ package commands;
 import basic.Person;
 import commands.base.*;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -10,9 +12,9 @@ public class RemoveByID extends Command {
         super("remove_by_id");
     }
 
-    public void execute(Environment env) throws NullException{
+    public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException{
         FieldsWork fw = new FieldsWork();
-        long nID = fw.id();
+        long nID = fw.id(sIn, sOut);
 
 
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
@@ -32,9 +34,9 @@ public class RemoveByID extends Command {
         }
 
         if (removed) {
-            System.out.println("Человек с ID '" + nID + "' успешно удален.");
+            sOut.println("Человек с ID '" + nID + "' успешно удален.");
         } else {
-            System.out.println("Человек с ID '" + nID + "' не найден в коллекции.");
+            sOut.println("Человек с ID '" + nID + "' не найден в коллекции.");
         }
     }
 
