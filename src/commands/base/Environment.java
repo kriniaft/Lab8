@@ -9,7 +9,7 @@ import java.util.HashMap;
 public final class Environment {
     private final HashMap<String, Command> stringCommandHashmap;
     public ArrayDeque<Person> profiles = new ArrayDeque<>();
-    private LocalDateTime collectionInitializationDate;
+    private final LocalDateTime collectionInitializationDate;
 
 
     public Environment(HashMap<String, Command> stringCommandHashmap, ArrayDeque<Person> profiles) {

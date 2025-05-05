@@ -1,8 +1,14 @@
 package basic;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Coordinates {
     private float x; //Максимальное значение поля: 946
     private float y;
+
+    public Coordinates(){}
+
     public Coordinates(float x, float y){
         setX(x);
         this.x = getX();
@@ -15,6 +21,7 @@ public class Coordinates {
         } else throw new IllegalArgumentException("Координата должна быть меньше 946");
     }
 
+    @XmlElement
     public float getX(){
         System.out.println();
         return x;
@@ -24,6 +31,7 @@ public class Coordinates {
       this.y = y;
     }
 
+    @XmlElement
     public float getY(){
         return y;
     }

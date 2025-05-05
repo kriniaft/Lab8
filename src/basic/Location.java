@@ -1,9 +1,14 @@
 package basic;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Location {
     private Float x; //Поле не может быть null
     private float y;
     private Float z; //Поле не может быть null
+
+    public Location(){}
 
     public Location(Float x, float y, Float z){
         if(x != null ) {
@@ -21,6 +26,7 @@ public class Location {
         this.x = x;
     }
 
+    @XmlElement
     public Float getX(){
         return x;
     }
@@ -29,13 +35,16 @@ public class Location {
         this.y = y;
     }
 
+    @XmlElement
     public float getY(){
         return y;
     }
+
     public void setZ(Float z){
         this.z = z;
     }
 
+    @XmlElement
     public Float getZ(){
         return z;
     }
