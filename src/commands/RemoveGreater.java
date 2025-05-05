@@ -1,11 +1,8 @@
 package commands;
 import basic.Person;
 import commands.base.*;
-
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.HashMap;
-
 import java.util.HashMap;
 import java.util.Iterator;
 

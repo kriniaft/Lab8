@@ -18,5 +18,6 @@ public class MapFilling {
         Show.register(map);
         UpdateID.register(map);
         Save.register(map);
+        ExecuteScript.register(map);
     }
 }
