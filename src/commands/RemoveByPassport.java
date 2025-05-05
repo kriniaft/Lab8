@@ -33,7 +33,6 @@ public class RemoveByPassport extends Command{
         }
 
         else {
-            sOut.println("Введите серию и номер паспорта:");
             pID = fw.passport(sIn, sOut);
         }
 

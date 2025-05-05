@@ -33,7 +33,6 @@ public class CountBySameHeight extends Command{
             }
         }
         else {
-            sOut.println("Введите рост:");
             targetHeight = fw.height(sIn, sOut);
         }
 

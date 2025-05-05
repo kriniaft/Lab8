@@ -35,7 +35,6 @@ public class UpdateID extends Command {
             }
         }
         else {
-            sOut.println("Введите ID человека, чей рост нужно изменить:");
             id = fw.id(sIn, sOut);
         }
 

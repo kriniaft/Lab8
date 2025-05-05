@@ -30,7 +30,6 @@ public class RemoveByID extends Command {
             }
         }
         else {
-            sOut.println("Введите ID:");
             nID = fw.id(sIn, sOut);
         }
 

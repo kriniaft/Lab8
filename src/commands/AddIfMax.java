@@ -38,7 +38,6 @@ public class AddIfMax extends Command {
               }
           }
           else {
-              sOut.println("Введите рост:");
               h = fw.height(sIn, sOut);
           }
 
