@@ -138,8 +138,7 @@ public class FieldsWork {
         public Location location(InputStream sIn, PrintStream sOut) throws NullException {
             while (true) {
                 try {
-                    sOut.println("Введите Расположение:");
-                    sOut.println("По Х");
+                    sOut.println("Введите Расположение:\nПо Х");
                     Scanner sc8 = new Scanner(System.in);
                     String xInput = sc8.nextLine();
                     Float x = Float.parseFloat(xInput);

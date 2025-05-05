@@ -1,3 +1,5 @@
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
@@ -32,6 +34,9 @@ public class Main{
         RemoveGreater.register(map);
         Show.register(map);
         UpdateID.register(map);
-        comcontr.command(environment);
+        PrintStream out = System.out;
+        InputStream inputStream = System.in;
+        comcontr.command(environment, inputStream, out);
+        //java nio 8 file
     }
 }
