@@ -1,6 +1,11 @@
 package basic;
 import java.time.ZonedDateTime;
 import java.util.Random;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 public class Person {
     private final long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name;
@@ -12,6 +17,10 @@ public class Person {
     private Country nationality;
     private Location location;
 
+    public Person() {
+        this.id = new Random().nextLong(1000);
+        this.creationDate = ZonedDateTime.now(); // временная зона может быть уточнена позже
+    }
 
     public Person(String n, Coordinates c, Float h, String p, Color hc, Country nt, Location l){
         setName(n);
@@ -27,7 +36,7 @@ public class Person {
 
     }
 
-
+    @XmlElement
     public long getId(){
         return id;
     }
@@ -38,6 +47,9 @@ public class Person {
         name = n;} else { throw new IllegalArgumentException("Некорректное имя");}
     }
 
+
+
+    @XmlElement
     public String getName(){
         return name;
     }
@@ -46,10 +58,13 @@ public class Person {
         if(c != null){
             coordinates = c;} else { throw new IllegalArgumentException("Некорректные координаты");}
     }
+
+    @XmlElement
     public Coordinates getCoordinates(){
         return coordinates;
     }
 
+    @XmlJavaTypeAdapter(ZonedDateTimeAdapter.class)
     public java.time.ZonedDateTime getCreationDate(){
         return creationDate;
     }
@@ -61,6 +76,7 @@ public class Person {
     }
 
 
+    @XmlElement
     public float getHeight() {
         return height;
     }
@@ -70,6 +86,7 @@ public class Person {
             passportID = p;} else { throw new IllegalArgumentException("Некорректные данные");}
     }
 
+    @XmlElement
     public String getPassportID(){
         return passportID;
     }
@@ -78,6 +95,8 @@ public class Person {
         if(c != null){
             hairColor = c;}else{ throw new IllegalArgumentException("Некорректный цвет волос");}
     }
+
+    @XmlElement
     public Color getHairColor(){
         return hairColor;
     }
@@ -86,6 +105,8 @@ public class Person {
         if(c != null){
             nationality = c;} else { throw new IllegalArgumentException("Некорректная страна");}
     }
+
+    @XmlElement
     public Country getNationality(){
         return nationality;
     }
@@ -95,6 +116,7 @@ public class Person {
             location = l;} else { throw new IllegalArgumentException("Некорректные координаты");}
     }
 
+    @XmlElement
     public Location getLocation(){
         return location;
     }
