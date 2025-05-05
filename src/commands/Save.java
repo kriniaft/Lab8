@@ -1,20 +1,22 @@
 package commands;
-import basic.Person;
-import commands.base.Command;
-import commands.base.Environment;
 
+import commands.base.*;
+import fileWork.FileController;
 import java.io.*;
-import java.util.ArrayDeque;
 import java.util.HashMap;
 
-class Save  {
+public class Save extends Command {
+    Save(){
+        super("save");
+    }
 
-
-    public void execute(ArrayDeque<Person> arDeq, Environment env, String fileName) {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            outputStream.writeObject(arDeq);
-        } catch (Exception e) {
-            System.out.println("Ошибка при сохранении");
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] arg) {
+        FileController fc = new FileController();
+        try {
+            fc.saveToFile(env.getFileName(), env.getProfiles());
+            sOut.println("Файл успешно сохранен");
+        } catch (IOException e) {
+            sOut.println("Не удалось сохранить файл(");
         }
     }
 
@@ -25,6 +27,7 @@ class Save  {
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         Save save = new Save();
+        stringCommandHashMap.put(save.getName(), save);
     }
 
 }
