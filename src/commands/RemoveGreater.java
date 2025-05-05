@@ -23,7 +23,12 @@ public class RemoveGreater extends Command{
         stringCommandHashMap.put(removeGreater.getName(), removeGreater);
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut){
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs){
+        if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
+            sOut.println("Коллекция пуста или не инициализирована");
+            return;
+        }
+
         Iterator<Person> iterator = env.profiles.iterator();
         FieldsWork fw = new FieldsWork();
         float maxHeight = fw.height(sIn, sOut);

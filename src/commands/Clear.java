@@ -20,7 +20,12 @@ public class Clear extends Command {
     }
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut){
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs){
+        if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
+            sOut.println("Коллекция пуста или не инициализирована");
+            return;
+        }
+
         env.profiles.clear();
         sOut.println("Коллекция очищена");
     }
