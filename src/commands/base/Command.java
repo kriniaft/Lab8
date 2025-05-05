@@ -18,6 +18,6 @@ public abstract class Command {
         return name;
     }
 
-    public abstract void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException;
+    public abstract void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException;
     public abstract String getHelp();
 }

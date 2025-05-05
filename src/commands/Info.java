@@ -14,7 +14,7 @@ public class Info extends Command {
     }
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) {
         ArrayDeque<Person> profiles = env.getProfiles();
         LocalDateTime initializationDate = env.getCollectionInitializationDate();
 

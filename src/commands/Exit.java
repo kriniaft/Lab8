@@ -11,7 +11,7 @@ public class Exit extends Command {
     }
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) {
         sOut.println("Завершение программы...");
         System.exit(0);
 

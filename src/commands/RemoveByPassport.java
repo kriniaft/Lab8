@@ -11,14 +11,31 @@ public class RemoveByPassport extends Command{
         super("remove_any_by_passport_id");
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException {
         FieldsWork fw = new FieldsWork();
-        String pID = fw.passport(sIn, sOut);
+        String pID;
 
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
             sOut.println("Коллекция пуста или не инициализирована");
             return;
         }
+
+        if (commandsArgs.length > 0) {
+            try {
+                if (!commandsArgs[0].matches("\\d+")) {
+                    throw new NumberFormatException();
+                }
+                pID = commandsArgs[0];
+            } catch (NumberFormatException e) {
+                sOut.println("Ошибка: серия и номер паспорта должны содержать только цифры");
+                return;
+            }
+        }
+
+        else {
+            pID = fw.passport(sIn, sOut);
+        }
+
 
         boolean removed = false;
         Iterator<basic.Person> iterator = env.getProfiles().iterator();

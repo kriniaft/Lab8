@@ -15,9 +15,10 @@ import commands.base.Environment;
 import javax.naming.InvalidNameException;
 
 public class Main{
-    public static void main(String[] args) throws Exception {
-       // CollectionController coll = new CollectionController();
-       // System.out.println("Введите название команды или help, чтобы узнать больше о командах (для выхода используйте 'exit')");
+    public static void main(String[] args) throws NullException, InvalidNameException {
+        System.out.println("Введите название команды или help, чтобы узнать больше о командах (для выхода используйте 'exit')");
+        CommandController comcontr = new CommandController();
+
         HashMap<String, Command> map = new HashMap<>();
         ArrayDeque<Person> person = new ArrayDeque<>();
         Environment environment = new Environment(map, person);
@@ -46,8 +47,7 @@ public class Main{
         UpdateID.register(map);
         PrintStream out = System.out;
         InputStream inputStream = System.in;
-        //
-        // comcontr.command(environment, inputStream, out);
+        comcontr.command(environment, inputStream, out);
         //java nio 8 file
     }
 }

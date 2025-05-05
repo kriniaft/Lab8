@@ -11,7 +11,11 @@ public class CommandController {
         sOut.print("Введите команду: ");
         Scanner sc = new Scanner(System.in);
         while(true) {
-            String name = sc.nextLine();
+            String input = sc.nextLine();
+            String[] s = input.split(" ");
+            String name = s[0];
+            String[] commandsArgs = new String[s.length - 1];
+            System.arraycopy(s, 1, commandsArgs, 0, commandsArgs.length);
             try {
                 if (name.isEmpty()) {
                     throw new NullException("Команда не может быть пустой.");
@@ -21,7 +25,7 @@ public class CommandController {
                 if (command == null) {
                     throw new NullException("Команда '" + name + "' не найдена.");
                 }
-                command.execute(env, sIn, sOut);
+                command.execute(env, sIn, sOut, commandsArgs);
             }catch(NullException e){
                 System.out.println("Команда  не найдена");
             }

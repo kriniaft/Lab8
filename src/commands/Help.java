@@ -12,7 +12,7 @@ public class Help extends Command {
         super("help");
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) {
         HashMap<String, Command> stringCommandHashMap = env.getStringCommandHashmap();
         stringCommandHashMap.forEach((key, value) -> {
             sOut.println(key + ": " + value.getHelp());

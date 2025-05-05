@@ -9,15 +9,34 @@ import java.util.Iterator;
 
 public class UpdateID extends Command {
     private UpdateID() {
-        super("update id");
+        super("update_id");
     }
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
-        Iterator<Person> iterator = env.profiles.iterator();
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException {
         FieldsWork fw = new FieldsWork();
-        long id = fw.id(sIn, sOut);
+        long id;
+
+        if (env.profiles == null || env.profiles.isEmpty()) {
+            sOut.println("Коллекция пуста или не инициализирована");
+            return;
+        }
+
+        Iterator<Person> iterator = env.profiles.iterator();
         boolean found = false;
+
+        if (commandsArgs.length > 0) {
+            try {
+                id = Long.parseLong(commandsArgs[0]);
+                if (id <= 0) throw new NumberFormatException();
+            } catch (NumberFormatException e) {
+                sOut.println("Ошибка: неверный формат ID. Используйте положительное число");
+                return;
+            }
+        }
+        else {
+            id = fw.id(sIn, sOut);
+        }
 
         while (iterator.hasNext()) {
             Person person = iterator.next();

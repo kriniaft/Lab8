@@ -18,9 +18,29 @@ public class AddIfMax extends Command {
       }
 
       @Override
-      public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
+      public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException {
         FieldsWork fw = new FieldsWork();
-        float h = fw.height(sIn, sOut);
+        float h;
+
+          if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
+              sOut.println("Коллекция пуста или не инициализирована");
+              return;
+          }
+
+          if (commandsArgs.length > 0) {
+              try {
+                  h = Float.parseFloat(commandsArgs[0]);
+                  if (h <= 0) throw new NumberFormatException();
+                  if(h>=4){ throw new NumberFormatException();}
+              } catch (NumberFormatException e) {
+                  sOut.println("Ошибка: рост должен быть положительным числом не больше 4");
+                  return;
+              }
+          }
+          else {
+              h = fw.height(sIn, sOut);
+          }
+
         boolean isMax = env.profiles.stream().allMatch(p -> h > p.getHeight());
           if(isMax){
             Person person = new Person(fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut), fw.passport(sIn, sOut), fw.color(sIn, sOut), fw.country(sIn, sOut), fw.location(sIn, sOut));

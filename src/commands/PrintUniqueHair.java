@@ -24,7 +24,12 @@ public class PrintUniqueHair extends Command {
     }
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) {
+        if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
+            sOut.println("Коллекция пуста или не инициализирована");
+            return;
+        }
+
         long countGreen = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.GREEN).count();
         long countBlue = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.BLUE).count();
         long countRed = env.getProfiles().stream().filter(p -> p.getHairColor() == Color.RED).count();

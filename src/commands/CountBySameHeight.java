@@ -13,13 +13,27 @@ public class CountBySameHeight extends Command{
 
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) {
         FieldsWork fw = new FieldsWork();
-        float targetHeight = fw.height(sIn, sOut);
+        float targetHeight;
 
-        if (env.getProfiles() == null) {
-            sOut.println("Ошибка: коллекция профилей не инициализирована.");
+        if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
+            sOut.println("Коллекция пуста или не инициализирована");
             return;
+        }
+
+        if (commandsArgs.length > 0) {
+            try {
+                targetHeight = Float.parseFloat(commandsArgs[0]);
+                if (targetHeight <= 0) throw new NumberFormatException();
+                if(targetHeight>=4){ throw new NumberFormatException();}
+            } catch (NumberFormatException e) {
+                sOut.println("Ошибка: рост должен быть положительным числом не больше 4");
+                return;
+            }
+        }
+        else {
+            targetHeight = fw.height(sIn, sOut);
         }
 
         long count = env.getProfiles().stream()

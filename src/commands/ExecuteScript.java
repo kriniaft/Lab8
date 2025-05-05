@@ -1,6 +1,8 @@
 package commands;
 import commands.base.*;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 public class ExecuteScript{

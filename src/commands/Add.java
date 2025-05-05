@@ -14,7 +14,7 @@ public class Add extends Command {
    }
 
    @Override
-   public void execute(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
+   public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException {
        FieldsWork fw = new FieldsWork();
        Person person = new Person(fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut),
                fw.passport(sIn, sOut), fw.color(sIn, sOut), fw.country(sIn, sOut), fw.location(sIn, sOut));
