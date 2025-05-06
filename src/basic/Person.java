@@ -77,7 +77,7 @@ public class Person {
 
 
     @XmlElement
-    public float getHeight() {
+    public Float getHeight() {
         return height;
     }
 

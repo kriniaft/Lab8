@@ -10,12 +10,14 @@ public final class Environment {
     private final HashMap<String, Command> stringCommandHashmap;
     public ArrayDeque<Person> profiles = new ArrayDeque<>();
     private final LocalDateTime collectionInitializationDate;
+    private final String arg;
 
 
-    public Environment(HashMap<String, Command> stringCommandHashmap, ArrayDeque<Person> profiles) {
+    public Environment(HashMap<String, Command> stringCommandHashmap, ArrayDeque<Person> profiles, String[] arg) {
         this.stringCommandHashmap = stringCommandHashmap;
         this.profiles = profiles;
         this.collectionInitializationDate = LocalDateTime.now();
+        this.arg = arg[0];
     }
 
     public HashMap<String, Command> getStringCommandHashmap() {
@@ -28,5 +30,9 @@ public final class Environment {
     }
     public LocalDateTime getCollectionInitializationDate() {
         return collectionInitializationDate;
+    }
+
+    public String getFileName(){
+        return arg;
     }
 }

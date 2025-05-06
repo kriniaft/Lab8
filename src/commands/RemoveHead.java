@@ -1,14 +1,10 @@
 package commands;
 
-import basic.Person;
-
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayDeque;
 import java.util.HashMap;
 import commands.base.Command;
 import commands.base.Environment;
-import java.util.HashMap;
 
 public class RemoveHead extends Command {
     private RemoveHead(){
