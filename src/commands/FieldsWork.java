@@ -69,7 +69,7 @@ public class FieldsWork {
                 try {
                     String height = sc4.nextLine();
                     float h = Float.parseFloat(height);
-                    if(h>=4){ throw new NumberFormatException();}
+                    if(h>=2.5 || h<=0){ throw new NumberFormatException();}
                     if (height.isEmpty()) {
                         throw new NullException("Вы ничего не ввели. Попробуйте ещё раз");
                     }

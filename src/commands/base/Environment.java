@@ -11,7 +11,7 @@ public final class Environment {
     public ArrayDeque<Person> profiles = new ArrayDeque<>();
     private final LocalDateTime collectionInitializationDate;
     private final String arg;
-
+    private boolean scriptMode = false;
 
     public Environment(HashMap<String, Command> stringCommandHashmap, ArrayDeque<Person> profiles, String[] arg) {
         this.stringCommandHashmap = stringCommandHashmap;
@@ -34,5 +34,13 @@ public final class Environment {
 
     public String getFileName(){
         return arg;
+    }
+
+    public boolean isScriptMode() {
+        return scriptMode;
+    }
+
+    public void setScriptMode(boolean scriptMode) {
+        this.scriptMode = scriptMode;
     }
 }

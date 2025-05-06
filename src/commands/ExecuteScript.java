@@ -1,7 +1,9 @@
 package commands;
+import basic.*;
 import commands.base.*;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.*;
 
 public class ExecuteScript extends Command{
@@ -10,6 +12,7 @@ public class ExecuteScript extends Command{
     }
     private static final HashSet<String> executingFiles = new HashSet<>();
 
+
     @Override
     public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] args) {
         if (args.length == 0) {
@@ -17,7 +20,7 @@ public class ExecuteScript extends Command{
             return;
         }
 
-        String fileName = args[0];
+        String fileName = args[0].trim();
 
         if (executingFiles.contains(fileName)) {
             sOut.println("Предотвращена рекурсивная загрузка скрипта: " + fileName);
@@ -33,6 +36,7 @@ public class ExecuteScript extends Command{
         executingFiles.add(fileName);
 
         try (Scanner fileScanner = new Scanner(file)) {
+            env.setScriptMode(true);
             while (fileScanner.hasNextLine()) {
                 String commandLine = fileScanner.nextLine().trim();
                 if (commandLine.isEmpty()) continue;
@@ -49,6 +53,7 @@ public class ExecuteScript extends Command{
                     sOut.println("Неизвестная команда: " + commandName);
                 }
             }
+            env.setScriptMode(false);
         } catch (FileNotFoundException e) {
             sOut.println("Ошибка: файл не найден.");
         } catch (Exception e) {
