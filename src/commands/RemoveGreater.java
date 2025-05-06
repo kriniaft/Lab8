@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class RemoveGreater extends Command{
-    private RemoveGreater(){
+    RemoveGreater(){
         super("remove_greater");
     }
     @Override
     public String getHelp(){
-        return "удаляет из коллекции все элементы, прsевышающие заданный";
+        return "удаляет из коллекции все элементы, превышающие заданный";
     }
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {
