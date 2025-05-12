@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import java.util.HashMap;
 
 public class AddIfMax extends Command {
-   private AddIfMax(){
+   public AddIfMax(){
         super("add_if_max");
    }
 

@@ -16,7 +16,9 @@ import commands.base.Environment;
 
 public class Main{
     public static void main(String[] args) throws Exception {
-        
+
+
+
         System.out.println("Введите название команды или help, чтобы узнать больше о командах (для выхода используйте 'exit')");
         CommandController comcontr = new CommandController();
 
