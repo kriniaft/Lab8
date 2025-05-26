@@ -86,12 +86,29 @@ public class DatabaseConnector {
 
     public boolean login(String username, String password){
         boolean isLogin = false;
-        try{
+        try {
             connection.setAutoCommit(false);
-            String
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            String sql = "SELECT password_hash FROM users WHERE login = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, username);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        String stored = rs.getString("password_hash");
+                        isLogin = stored.equals(hashPassword(password));
+                    }
+                }
+            }
+        }catch (SQLException e) {
+                System.out.println("Ошибка при входе");
+            } finally {
+                try {
+                    connection.setAutoCommit(true);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        if (!isLogin) System.out.println("Неверный логин или пароль");
+        return isLogin;
     }
 
 
@@ -110,7 +127,6 @@ public class DatabaseConnector {
             throw new RuntimeException("SHA-384 not supported", e);
         }
     }
-
 
 
     private void setScriptRunnerConfig() {
