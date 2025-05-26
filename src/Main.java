@@ -29,6 +29,7 @@ public class Main{
                 } catch (SQLException e) {
                     System.out.println(" Ошибка при подключении к базе данных:");
                     e.printStackTrace();
+                    System.out.println("ЭТО МЫ ТОЧНО ПОТОМ УДАЛИМ");
                 }
 
 
