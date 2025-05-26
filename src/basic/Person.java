@@ -1,4 +1,5 @@
 package basic;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Random;
 import javax.xml.bind.annotation.XmlElement;
@@ -18,23 +19,25 @@ public class Person {
     private Location location;
     private String Creator;
 
-    public Person() {
-        this.id = new Random().nextLong(1000);
-        this.creationDate = ZonedDateTime.now(); // временная зона может быть уточнена позже
+
+    public Person(long id, String n, Coordinates c, Float h, String p,
+                  Color hc, Country nt, Location l, ZonedDateTime creationDate) {
+        this.id = id;
+        this.name = n;
+        this.coordinates = c;
+        this.height = h;
+        this.passportID = p;
+        this.hairColor = hc;
+        this.nationality = nt;
+        this.location = l;
+
+        this.creationDate = ZonedDateTime.now(nationality.getZoneId());
     }
 
-    public Person(String n, Coordinates c, Float h, String p, Color hc, Country nt, Location l){
-        setName(n);
-        setCoordinates(c);
-        setHeight(h);
-        setPassportID(p);
-        setHairColor(hc);
-        setNationality(nt);
-        setLocation(l);
-        creationDate = ZonedDateTime.now(nt.getZoneId());
-        Random random = new Random();
-        id = random.nextLong(1000);
-
+    public Person(long id, String n, Coordinates c, Float h, String p,
+                  Color hc, Country nt, Location l) {
+        this(id, n, c, h, p, hc, nt, l,
+                ZonedDateTime.now(nt.getZoneId()));
     }
 
     @XmlElement
@@ -122,9 +125,15 @@ public class Person {
         return location;
     }
 
+
+
+
+
+
     public String toString(){
         return "ID " + id + ", " + "name: " + name + ", " + "Coordinates: " + coordinates + ", " +
                 "Date: " +  creationDate + ", " + "Height: " + height + ", " + "Passport: " + passportID + ", " +
                 "Hair color: " + hairColor + ", " + "Nationality: " + nationality + ", " + "Location: " + location + ".";
     }
+
 }
