@@ -4,13 +4,15 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-import basic.Users;
+import basic.*;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 public class DatabaseConnector {
@@ -41,6 +43,65 @@ public class DatabaseConnector {
         }
     }
 
+    public HashSet<Person> getPersons() {
+        HashSet<Person> persons = new HashSet<>();
+        String sql = "SELECT id, name, coord_x, coord_y, creation_date, height, passport_id, hair_color, nationality, locat_x, locat_y, locat_z FROM person";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                long id = rs.getLong("id");
+                String name = rs.getString("name");
+
+                Coordinates coords = new Coordinates();
+                coords.setX(rs.getFloat("coord_x"));
+                coords.setY(rs.getFloat("coord_y"));
+
+                Color hairColor = null;
+                try {
+                    String hairColorStr = rs.getString("hair_color");
+                    if (hairColorStr != null) {
+                        hairColor = Color.valueOf(hairColorStr);
+                    }
+                } catch (IllegalArgumentException e) {
+                    hairColor = null;
+                }
+
+                Country nationality = null;
+                try {
+                    String nationalityStr = rs.getString("nationality");
+                    if (nationalityStr != null) {
+                        nationality = Country.valueOf(nationalityStr);
+                    }
+                } catch (IllegalArgumentException e) {
+                    nationality = null;
+                }
+
+                Float height = rs.getObject("height") != null ? rs.getFloat("height") : null;
+                String passportID = rs.getString("passport_id");
+
+                Location location = new Location();
+                location.setX(rs.getFloat("locat_x"));
+                location.setY(rs.getFloat("locat_y"));
+                location.setZ(rs.getFloat("locat_z"));
+
+                Timestamp ts = rs.getTimestamp("creation_date");
+                ZonedDateTime creationDate;
+                if (ts != null) {
+                    creationDate = ts.toInstant().atZone(nationality != null ? nationality.getZoneId() : ZoneId.systemDefault());
+                } else {
+                    creationDate = nationality != null ? ZonedDateTime.now(nationality.getZoneId()) : ZonedDateTime.now();
+                }
+
+                Person person = new Person(id, name, coords, height, passportID, hairColor, nationality, location, creationDate);
+                persons.add(person);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return persons;
+    }
+
+
     public Map<String, Users> getUsers(){
     Map<String, Users> users = new HashMap<>();
         String sql = "SELECT id, login, password_hash, created_at FROM users";
@@ -63,10 +124,10 @@ public class DatabaseConnector {
         return users;
     }
 
-    public void registration(String username, String password){
-        try{
+    public void registration(String username, String password) {
+        try {
             connection.setAutoCommit(false);
-            if(getUsers().containsKey(username)){
+            if (getUsers().containsKey(username)) {
                 System.out.println("Пользователь уже зарегистрирован");
             } else {
                 String sql = "INSERT INTO users (login, password_hash) VALUES (?, ?)";
@@ -93,30 +154,28 @@ public class DatabaseConnector {
             throw new RuntimeException(e);
         }
 
-    }
 
 
-    public HashSet<Person> getPersons() {
-        HashSet<Person> persons = new HashSet<>();
-        String sql = "SELECT * FROM person";
-        try PreparedStatement ps = .prepareStatement(sql);
 
-    }
+
+
+
+
+
+        private void setScriptRunnerConfig() {
+    DatabaseConnector.runner.setStopOnError(true);
+    DatabaseConnector.runner.setAutoCommit(false);
+    DatabaseConnector.runner.setLogWriter(null);
+    DatabaseConnector.runner.setSendFullScript(false);
 }
 
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA-384 not supported", e);
-        }
-    }
 
 
 
-    private void setScriptRunnerConfig() {
-        runner.setStopOnError(true);
-        runner.setAutoCommit(false);
-        runner.setLogWriter(null);
-        runner.setSendFullScript(false);
-    }
+
+
+
+
+
 }
 
