@@ -19,7 +19,7 @@ import commands.base.Environment;
 
 public class Main{
     public static void main(String[] args) throws Exception {
-                try (Connection conn = DatabaseConnector.connect()) {
+              /*  try (Connection conn = DatabaseConnector.connect()) {
                     if (conn != null) {
                         System.out.println(" Подключение к базе данных прошло успешно!");
                     } else {
