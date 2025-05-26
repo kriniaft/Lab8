@@ -21,6 +21,7 @@ public class DatabaseConnector {
     private static final String PASSWORD = "p0wZzpVdlHiU21tH";
     private static Connection connection;
     private static ScriptRunner runner;
+    private String userNow;
 
     public void connect() throws SQLException {
         try {
@@ -172,6 +173,78 @@ public class DatabaseConnector {
         return isLogin;
     }
 
+    public boolean addPerson(Person person) {
+        return addPerson(person, userNow);
+    }
+
+    public boolean addPerson(Person person, String username) {
+        boolean condition = false;
+        if (!getUsers().containsKey(username)) {
+            System.out.println("Вам необходимо зарегистрироваться");
+            return false;
+        }
+        try {
+            connection.setAutoCommit(false);
+            int id = minId();
+            String sql = "INSERT INTO music_bands "
+                    + "(id,name,coord_x,coord_y,number_of_participants,genre,studio_name,created_by) "
+                    + "VALUES (?, ?, ?, ?, ?, ?::music_genre, ?, ?)";
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, id);
+                ps.setString(2, person.getName());
+                ps.setFloat(3, person.getCoordinates().getX());
+                ps.setFloat(4, person.getCoordinates().getY());
+                ps.setLong(5, person.getCreationDate());
+                ps.setFloat(6, person.getHeight());
+                ps.setString(7, person.getPassportID());
+                ps.setString(8, String.valueOf(person.getHairColor()));
+                ps.setString(9, String.valueOf(person.getNationality()));
+                ps.setFloat(10, person.getLocation().getX());
+                ps.setFloat(11, person.getLocation().getY());
+                ps.setFloat(12, person.getLocation().getZ());
+                ps.setString(13, username);
+                if (ps.executeUpdate() == 0) throw new SQLException();
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) person.setId(keys.getInt(1));
+                    else throw new SQLException();
+                }
+            }
+            connection.commit();
+            condition = true;
+        } catch (SQLException e) {
+            System.out.println("Не получилось добавить человека");
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return condition;
+    }
+
+    private int minId() throws SQLException {
+        String sql = "SELECT id FROM music_bands ORDER BY id";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            int number = 1;
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                if (id == number) {
+                    number++;
+                } else if (id > number) {
+                    break;
+                }
+            }
+            return number;
+        }
+    }
+
     private String hashPassword(String pw){
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-384");
@@ -187,16 +260,6 @@ public class DatabaseConnector {
             throw new RuntimeException("SHA-384 not supported", e);
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
