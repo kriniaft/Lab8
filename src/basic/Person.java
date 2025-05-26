@@ -16,6 +16,7 @@ public class Person {
     private Color hairColor;
     private Country nationality;
     private Location location;
+    private String Creator;
 
     public Person() {
         this.id = new Random().nextLong(1000);

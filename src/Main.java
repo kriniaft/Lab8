@@ -1,10 +1,13 @@
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.List;
 
 import commands.base.MapFilling;
+import database.DatabaseConnector;
 import fileWork.FileController;
 
 
@@ -16,9 +19,19 @@ import commands.base.Environment;
 
 public class Main{
     public static void main(String[] args) throws Exception {
+                try (Connection conn = DatabaseConnector.connect()) {
+                    if (conn != null) {
+                        System.out.println(" Подключение к базе данных прошло успешно!");
+                    } else {
+                        System.out.println(" Подключение не удалось (null).");
+                    }
+                } catch (SQLException e) {
+                    System.out.println(" Ошибка при подключении к базе данных:");
+                    e.printStackTrace();
+                }
 
 
-
+/*
         System.out.println("Введите название команды или help, чтобы узнать больше о командах (для выхода используйте 'exit')");
         CommandController comcontr = new CommandController();
 
@@ -34,6 +47,6 @@ public class Main{
 
         PrintStream out = System.out;
         InputStream inputStream = System.in;
-        comcontr.command(environment, inputStream, out);
+        comcontr.command(environment, inputStream, out); */
     }
 }
