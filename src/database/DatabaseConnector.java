@@ -80,10 +80,20 @@ public class DatabaseConnector {
                 }
             }
         } catch (SQLException e) {
+            System.out.println("Ошибка регистрации");
+        }
+    }
+
+    public boolean login(String username, String password){
+        boolean isLogin = false;
+        try{
+            connection.setAutoCommit(false);
+            String
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
+
 
     private String hashPassword(String pw){
         try {
