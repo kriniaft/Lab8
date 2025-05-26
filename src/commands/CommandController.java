@@ -26,6 +26,7 @@ public class CommandController {
                 if (command == null) {
                     throw new NullException("Команда '" + name + "' не найдена.");
                 }
+                //тут проверка на имя команды
                 command.execute(env, sIn, sOut, commandsArgs);
             }catch(NullException e){
                 sOut.println("Команда  не найдена");
