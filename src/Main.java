@@ -16,6 +16,7 @@ import basic.*;
 import commands.base.Command;
 import commands.base.Environment;
 
+import javax.naming.InvalidNameException;
 
 public class Main{
     public static void main(String[] args) throws Exception {
@@ -28,6 +29,7 @@ public class Main{
                 } catch (SQLException e) {
                     System.out.println(" Ошибка при подключении к базе данных:");
                     e.printStackTrace();
+                    System.out.println("ЭТО МЫ ТОЧНО ПОТОМ УДАЛИМ");
                 }
 
 
@@ -47,6 +49,6 @@ public class Main{
 
         PrintStream out = System.out;
         InputStream inputStream = System.in;
-        comcontr.command(environment, inputStream, out); */
+        comcontr.command(environment, inputStream, out);
     }
 }
