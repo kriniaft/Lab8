@@ -9,9 +9,12 @@ import java.util.ArrayDeque;
 
 public abstract class Command {
     private final String name;
+    private boolean isArgs;
 
-    protected Command(String name) {
+    protected Command(String name, boolean args) {
+
         this.name = name;
+        isArgs = args;
     }
 
     public String getName() {

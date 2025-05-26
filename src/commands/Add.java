@@ -9,7 +9,7 @@ package commands;
 
 public class Add extends Command {
    private Add() {
-       super("add");
+       super("add", false);
    }
 
    @Override
@@ -42,10 +42,10 @@ public class Add extends Command {
                sOut.println("Ошибка при добавлении из скрипта: " + e.getMessage());
            }
        } else {
-           // Старое поведение
            FieldsWork fw = new FieldsWork();
            Person person = new Person(fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut),
                    fw.passport(sIn, sOut), fw.color(sIn, sOut), fw.country(sIn, sOut), fw.location(sIn, sOut));
+           // сохр в таблицу
            env.profiles.offerLast(person);
            sOut.println("Новый человек успешно добавлен");
        }
