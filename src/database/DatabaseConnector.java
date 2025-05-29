@@ -40,7 +40,7 @@ public class DatabaseConnector {
         )) {
             runner.runScript(fr);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка при работе с файлом");;
         }
     }
 
@@ -97,7 +97,7 @@ public class DatabaseConnector {
                 persons.add(person);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка при чтении скрипта SQL");;
         }
         return persons;
     }
@@ -112,12 +112,8 @@ public class DatabaseConnector {
                 long id = rs.getLong("id");
                 String login = rs.getString("login");
                 String hash = rs.getString("password_hash");
-                LocalDateTime created = rs.getTimestamp("created_at")
-                        .toLocalDateTime();
-                users.put(
-                        login,
-                        new Users(id, login, hash, created)
-                );
+                LocalDateTime created = rs.getTimestamp("created_at").toLocalDateTime();
+                users.put(login, new Users(id, login, hash, created));
             }
         } catch (SQLException e) {
             System.out.println("Ошибка  в сохранении пользователя");
@@ -194,7 +190,7 @@ public class DatabaseConnector {
                 ps.setString(2, person.getName());
                 ps.setFloat(3, person.getCoordinates().getX());
                 ps.setFloat(4, person.getCoordinates().getY());
-                ps.setLong(5, person.getCreationDate());
+                ps.setInt(5, person.getCreationDate());
                 ps.setFloat(6, person.getHeight());
                 ps.setString(7, person.getPassportID());
                 ps.setString(8, String.valueOf(person.getHairColor()));
@@ -229,7 +225,7 @@ public class DatabaseConnector {
     }
 
     private int minId() throws SQLException {
-        String sql = "SELECT id FROM music_bands ORDER BY id";
+        String sql = "SELECT id FROM person ORDER BY id";
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             int number = 1;
