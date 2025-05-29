@@ -1,6 +1,7 @@
 package commands;
 import basic.Person;
 import commands.base.*;
+import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -14,7 +15,7 @@ public class Info extends Command {
     }
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) {
         ArrayDeque<Person> profiles = env.getProfiles();
         LocalDateTime initializationDate = env.getCollectionInitializationDate();
 

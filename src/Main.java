@@ -20,7 +20,8 @@ import javax.naming.InvalidNameException;
 public class Main{
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
-        CommandController comcontr = new CommandController();
+        DatabaseConnector db = new DatabaseConnector();
+        CommandController comcontr = new CommandController(db);
 
         HashMap<String, Command> nameMap = new HashMap<>();
         HashMap<String, Command> comForEveryone = new HashMap<>();
@@ -35,7 +36,7 @@ public class Main{
      //   List<Person> loaded = FileController.readFile(args[0]);
      //   environment.getProfiles().addAll(loaded);
 
-        DatabaseConnector db = new DatabaseConnector();
+
         try {
             db.connect(); // подключение к базе
         } catch (Exception e) {

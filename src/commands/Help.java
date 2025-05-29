@@ -2,6 +2,8 @@ package commands;
 
 import commands.base.Command;
 import commands.base.Environment;
+import database.DatabaseConnector;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -11,7 +13,7 @@ public class Help extends Command {
         super("help");
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) {
         HashMap<String, Command> stringCommandHashMap = env.getStringCommandHashmap();
         stringCommandHashMap.forEach((key, value) -> {
             sOut.println(key + ": " + value.getHelp());

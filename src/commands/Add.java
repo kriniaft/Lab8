@@ -2,6 +2,8 @@ package commands;
  import basic.*;
  import commands.base.Command;
  import commands.base.Environment;
+ import database.DatabaseConnector;
+
  import java.io.InputStream;
  import java.io.PrintStream;
  import java.sql.SQLException;
@@ -14,7 +16,7 @@ public class Add extends Command {
    }
 
    @Override
-   public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException, SQLException {
+   public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException, SQLException {
        if (env.isScriptMode()) {
            try {
                if (commandsArgs.length < 9) {
@@ -35,7 +37,7 @@ public class Add extends Command {
                Coordinates coordinates = new Coordinates(x, y);
                Location location = new Location(locX, locY, locZ);
 
-               Person person = new Person(dBC.minId(), name, coordinates, height, passportID, color, country, location);
+               Person person = new Person(db.minId(), name, coordinates, height, passportID, color, country, location);
 
                env.profiles.offerLast(person);
                sOut.println("Человек добавлен из скрипта.");
@@ -44,7 +46,7 @@ public class Add extends Command {
            }
        } else {
            FieldsWork fw = new FieldsWork();
-           Person person = new Person(dBC.minId(), fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut),
+           Person person = new Person(db.minId(), fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut),
                    fw.passport(sIn, sOut), fw.color(sIn, sOut), fw.country(sIn, sOut), fw.location(sIn, sOut));
            // сохр в таблицу
            env.profiles.offerLast(person);

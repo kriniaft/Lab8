@@ -1,6 +1,8 @@
 package commands;
 import basic.Person;
 import commands.base.*;
+import database.DatabaseConnector;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -20,7 +22,7 @@ public class RemoveGreater extends Command{
         stringCommandHashMap.put(removeGreater.getName(), removeGreater);
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs){
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db){
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
             sOut.println("Коллекция пуста или не инициализирована");
             return;

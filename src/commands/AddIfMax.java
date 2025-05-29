@@ -2,8 +2,11 @@ package commands;
 
 import basic.Person;
 import commands.base.*;
+import database.DatabaseConnector;
+
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class AddIfMax extends Command {
@@ -17,7 +20,7 @@ public class AddIfMax extends Command {
       }
 
       @Override
-      public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException {
+      public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException, SQLException {
         FieldsWork fw = new FieldsWork();
         float h;
 
@@ -42,7 +45,7 @@ public class AddIfMax extends Command {
 
         boolean isMax = env.profiles.stream().allMatch(p -> h > p.getHeight());
           if(isMax){
-            Person person = new Person(fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut), fw.passport(sIn, sOut), fw.color(sIn, sOut), fw.country(sIn, sOut), fw.location(sIn, sOut));
+            Person person = new Person(db.minId(),fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut), fw.passport(sIn, sOut), fw.color(sIn, sOut), fw.country(sIn, sOut), fw.location(sIn, sOut));
             env.profiles.add(person);
             sOut.println("Новый человек успешно добавлен");
           }else{

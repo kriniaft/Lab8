@@ -1,6 +1,7 @@
 package commands;
 import basic.*;
 import commands.base.*;
+import database.DatabaseConnector;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -14,7 +15,7 @@ public class ExecuteScript extends Command{
 
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] args) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] args, DatabaseConnector db) {
         if (args.length == 0) {
             sOut.println("Укажите имя файла со скриптом.");
             return;
@@ -48,7 +49,7 @@ public class ExecuteScript extends Command{
 
                 Command command = env.getStringCommandHashmap().get(commandName);
                 if (command != null) {
-                    command.execute(env, sIn, sOut, commandArgs);
+                    command.execute(env, sIn, sOut, commandArgs, db);
                 } else {
                     sOut.println("Неизвестная команда: " + commandName);
                 }

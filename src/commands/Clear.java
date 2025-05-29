@@ -2,6 +2,8 @@ package commands;
 
 import commands.base.Command;
 import commands.base.Environment;
+import database.DatabaseConnector;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -19,7 +21,7 @@ public class Clear extends Command {
     }
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs){
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db){
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
             sOut.println("Коллекция пуста или не инициализирована");
             return;

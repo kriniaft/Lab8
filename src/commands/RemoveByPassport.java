@@ -1,5 +1,6 @@
 package commands;
 import commands.base.*;
+import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -11,7 +12,7 @@ public class RemoveByPassport extends Command{
         super("remove_any_by_passport_id");
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException {
         FieldsWork fw = new FieldsWork();
         String pID;
 

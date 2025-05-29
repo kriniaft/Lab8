@@ -1,5 +1,7 @@
 package commands;
 import commands.base.*;
+import database.DatabaseConnector;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -12,7 +14,7 @@ public class CountBySameHeight extends Command{
 
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) {
         FieldsWork fw = new FieldsWork();
         float targetHeight;
 

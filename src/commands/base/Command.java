@@ -10,19 +10,20 @@ import java.sql.SQLException;
 import java.util.ArrayDeque;
 
 public abstract class Command {
-    private final String name;
-    private boolean isArgs;
-
-    public DatabaseConnector dBC = new DatabaseConnector();
+    private String name;
 
     protected Command(String name) {
         this.name = name;
     }
+    protected Command(DatabaseConnector db) {
+        this.db = db;
+    }
+
 
     public String getName() {
         return name;
     }
 
-    public abstract void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException, SQLException;
+    public abstract void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException, SQLException;
     public abstract String getHelp();
 }

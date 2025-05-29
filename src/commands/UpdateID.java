@@ -1,6 +1,7 @@
 package commands;
 import basic.*;
 import commands.base.*;
+import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -13,7 +14,7 @@ public class UpdateID extends Command {
     }
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) throws NullException {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException {
         FieldsWork fw = new FieldsWork();
         long id;
 

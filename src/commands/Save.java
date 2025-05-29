@@ -1,6 +1,7 @@
 package commands;
 
 import commands.base.*;
+import database.DatabaseConnector;
 import fileWork.FileController;
 import java.io.*;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ public class Save extends Command {
         super("save");
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] arg) {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] arg, DatabaseConnector db) {
         FileController fc = new FileController();
         try {
             fc.saveToFile(env.getFileName(), env.getProfiles());
