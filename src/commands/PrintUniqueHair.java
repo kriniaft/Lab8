@@ -23,6 +23,11 @@ public class PrintUniqueHair extends Command {
         stringCommandHashMap.put(puh.getName(), puh);
     }
 
+    public static void regForEveryone(HashMap<String, Command> mapForEveryone) {
+        PrintUniqueHair hair = new PrintUniqueHair();
+        mapForEveryone.put(hair.getName(), hair);
+    }
+
     @Override
     public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs) {
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {

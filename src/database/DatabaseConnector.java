@@ -23,6 +23,10 @@ public class DatabaseConnector {
     private static ScriptRunner runner;
     private String userNow;
 
+    public void setCurrentUser(String username) {
+        this.userNow = username;
+    }
+
     public void connect() throws SQLException {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -224,7 +228,7 @@ public class DatabaseConnector {
         return condition;
     }
 
-    private int minId() throws SQLException {
+    public int minId() throws SQLException {
         String sql = "SELECT id FROM person ORDER BY id";
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {

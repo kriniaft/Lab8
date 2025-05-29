@@ -40,4 +40,8 @@ public class Info extends Command {
         Info info = new Info();
         stringCommandHashMap.put(info.getName(), info);
     }
+    public static void regForEveryone(HashMap<String, Command> mapForEveryone) {
+        Info info = new Info();
+        mapForEveryone.put(info.getName(), info);
+    }
 }

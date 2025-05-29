@@ -52,4 +52,9 @@ public class CountBySameHeight extends Command{
         stringCommandHashMap.put(countBySameHeight.getName(), countBySameHeight);
     }
 
+    public static void regForEveryone(HashMap<String, Command> mapForEveryone) {
+        CountBySameHeight count = new CountBySameHeight();
+        mapForEveryone.put(count.getName(), count);
+    }
+
 }

@@ -28,4 +28,9 @@ public class Exit extends Command {
         Exit exit = new Exit();
         stringCommandHashMap.put(exit.getName(), exit);
     }
+
+    public static void regForEveryone(HashMap<String, Command> mapForEveryone) {
+        Exit exit = new Exit();
+        mapForEveryone.put(exit.getName(), exit);
+    }
 }

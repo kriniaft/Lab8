@@ -2,12 +2,13 @@ package commands;
 import commands.base.*;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class CommandController {
-    public void command(Environment env, InputStream sIn, PrintStream sOut) throws NullException {
+    public void command(Environment env, InputStream sIn, PrintStream sOut, String userName) throws NullException {
         sOut.print("Введите команду: ");
         Scanner sc = new Scanner(System.in);
         while(true) {
@@ -26,13 +27,24 @@ public class CommandController {
                 if (command == null) {
                     throw new NullException("Команда '" + name + "' не найдена.");
                 }
+
                 //тут проверка на имя команды
+                if (userName == null){
+                    HashMap<String, Command> comForEveryOne = env.getCommandForEveryone();
+                    if(comForEveryOne.containsKey(name)) {
+                        Command cd = comForEveryOne.get(name);
+                        cd.execute(env, sIn, sOut, commandsArgs);
+                    }else{System.out.println("Введенная команда недоступна");}
+                }
+
                 command.execute(env, sIn, sOut, commandsArgs);
             }catch(NullException e){
                 sOut.println("Команда  не найдена");
             }catch(NoSuchElementException e){
                 sOut.println("как вы узнали про эту комбинацию? хорошо, мы завершим работу \n но никому об этом не говорите");
                 break;
+            } catch (SQLException e) {
+                System.out.println("Ощибка при работе с SQL");;
             }
         }
     }

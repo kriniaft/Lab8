@@ -32,6 +32,10 @@ public class Show extends Command {
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         Show show = new Show();
         stringCommandHashMap.put(show.getName(), show);
+    }
 
+    public static void regForEveryone(HashMap<String, Command> mapForEveryone) {
+        Show show = new Show();
+        mapForEveryone.put(show.getName(), show);
     }
 }

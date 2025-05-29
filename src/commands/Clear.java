@@ -34,5 +34,10 @@ public class Clear extends Command {
         stringCommandHashMap.put(clear.getName(), clear);
     }
 
+    public static void regForEveryone(HashMap<String, Command> mapForEveryone) {
+        Clear clear = new Clear();
+        mapForEveryone.put(clear.getName(), clear);
+    }
+
 
 }
