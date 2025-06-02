@@ -19,14 +19,18 @@ public class MapFilling {
         UpdateID.register(map);
         Save.register(map);
         ExecuteScript.register(map);
+        Registration.register(map);
+        Login.register(map);
+        LogOut.register(map);
     }
     public void mapForEveryOneFill(HashMap<String, Command> map){
-        Clear.regForEveryone(map);
         CountBySameHeight.regForEveryone(map);
         Exit.regForEveryone(map);
         Help.regForEveryone(map);
         Info.regForEveryone(map);
         PrintUniqueHair.regForEveryone(map);
         Show.regForEveryone(map);
+        Login.regForEveryone(map);
+        Registration.regForEveryone(map);
     }
 }

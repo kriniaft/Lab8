@@ -19,7 +19,7 @@ public class Help extends Command {
             sOut.println(key + ": " + value.getHelp());
         });
         System.out.println("Учтите! Пользователям БЕЗ авторизации доступны ТОЛЬКО команды:");
-        HashMap<String, Command> comForEveryone = env.getStringCommandHashmap();
+        HashMap<String, Command> comForEveryone = env.getCommandForEveryone();
         comForEveryone.forEach((key, value) -> {
             sOut.println(key + ": " + value.getHelp());
         });

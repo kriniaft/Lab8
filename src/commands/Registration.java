@@ -15,7 +15,6 @@ public class Registration extends Command{
     public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException {
         try{
             Scanner sc = new Scanner(System.in);
-            System.out.println("ведите логин:");
             while (true) {
                 System.out.println("ведите логин:");
                 String login = sc.nextLine();
@@ -42,6 +41,10 @@ public class Registration extends Command{
     public static void register(HashMap<String, Command> stringCommandHashMap) {
         Registration reg = new Registration();
         stringCommandHashMap.put(reg.getName(), reg);
+    }
+    public static void regForEveryone(HashMap<String, Command> mapForEveryone) {
+        Registration registration = new Registration();
+        mapForEveryone.put(registration.getName(), registration);
     }
 }
 

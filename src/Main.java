@@ -33,47 +33,16 @@ public class Main{
      //   environment.getProfiles().addAll(loaded);
 
 
-        try {
+       /* try {
             db.connect(); // подключение к базе
         } catch (Exception e) {
             System.out.println("Ошибка подключения к базе данных");
             return;
-        }
+        }*/
 
         System.out.println("Добро пожаловать!");
-        String username;
-
-        while (true) {
-            System.out.print("Введите команду (login/register/exit): ");
-            String command = sc.nextLine().trim().toLowerCase();
-
-            if (command.equals("exit")) {
-                System.out.println("Выход...");
-                return;
-            }
-
-            System.out.println("Логин: ");
-            username = sc.nextLine().trim();
-            db.setUserNow(username);
-            System.out.println("Пароль: ");
-            String password = sc.nextLine().trim();
-
-            if (command.equals("register")) {
-                db.registration(username, password);
-            } else if (command.equals("login")) {
-                if (db.login(username, password)) {
-                    System.out.println("Успешный вход как " + username);
-                    break;
-                } else {
-                    System.out.println("Неверный логин или пароль");
-                }
-            } else {
-                System.out.println("Неизвестная команда");
-            }
-        }
-
         PrintStream out = System.out;
         InputStream inputStream = System.in;
-        comcontr.command(environment, inputStream, out, username);
+        comcontr.command(environment, inputStream, out, db);
     }
 }

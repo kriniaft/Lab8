@@ -15,7 +15,7 @@ public class CommandController {
         this.db = db;
     }
 
-    public void command(Environment env, InputStream sIn, PrintStream sOut, String userName) throws NullException {
+    public void command(Environment env, InputStream sIn, PrintStream sOut, DatabaseConnector db) throws NullException {
         sOut.print("Введите команду: ");
         Scanner sc = new Scanner(System.in);
         while(true) {
@@ -36,15 +36,13 @@ public class CommandController {
                 }
 
                 //тут проверка на имя команды
-                if (userName == null){
+                if (db.getUserNow() == null){
                     HashMap<String, Command> comForEveryOne = env.getCommandForEveryone();
                     if(comForEveryOne.containsKey(name)) {
                         Command cd = comForEveryOne.get(name);
                         cd.execute(env, sIn, sOut, commandsArgs, db);
                     }else{System.out.println("Введенная команда недоступна");}
-                }
-
-                command.execute(env, sIn, sOut, commandsArgs, db);
+                }else{ command.execute(env, sIn, sOut, commandsArgs, db);}
             }catch(NullException e){
                 sOut.println("Команда  не найдена");
             }catch(NoSuchElementException e){
