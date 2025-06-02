@@ -6,6 +6,9 @@ import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class Clear extends Command {
@@ -21,14 +24,31 @@ public class Clear extends Command {
     }
 
     @Override
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db){
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws SQLException {
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
             sOut.println("Коллекция пуста или не инициализирована");
             return;
         }
+        try {
+            Connection conn = db.getConnection();
 
-        env.profiles.clear();
-        sOut.println("Коллекция очищена");
+            String deleteSQL = "DELETE FROM person WHERE username = ?";
+            try (PreparedStatement ps = conn.prepareStatement(deleteSQL)) {
+                ps.setString(1, db.getUserNow());
+                int deletedCount = ps.executeUpdate();
+                sOut.println("Удалено записей из базы: " + deletedCount);
+            }
+
+            env.getProfiles().clear();
+            env.setProfiles(db.getPersons());
+            sOut.println("Коллекция очищена");
+
+        } catch (SQLException e) {
+            sOut.println("Ошибка при очистке: " + e.getMessage());
+        }catch(Exception e){
+            System.out.println("Ошибка при удалении коллекции");
+        }
+
     }
 
     public static void register(HashMap<String, Command> stringCommandHashMap) {

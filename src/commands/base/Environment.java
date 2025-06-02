@@ -34,6 +34,11 @@ public final class Environment {
     public ArrayDeque<Person> getProfiles(){
         return profiles;
     }
+
+    public void setProfiles(ArrayDeque<Person> profiles) {
+        this.profiles = profiles;
+    }
+
     public LocalDateTime getCollectionInitializationDate() {
         return collectionInitializationDate;
     }

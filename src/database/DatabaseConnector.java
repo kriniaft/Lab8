@@ -41,6 +41,11 @@ public class DatabaseConnector {
         }
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
+
     public void create() {
         try (Reader fr = Files.newBufferedReader(
                 Paths.get("src/database/createSQL"),
@@ -52,8 +57,8 @@ public class DatabaseConnector {
         }
     }
 
-    public HashSet<Person> getPersons() {
-        HashSet<Person> persons = new HashSet<>();
+    public ArrayDeque<Person> getPersons() {
+        ArrayDeque<Person> persons = new ArrayDeque<>();
         String sql = "SELECT id, name, coord_x, coord_y, creation_date, height, passport_id, hair_color, nationality, locat_x, locat_y, locat_z FROM person";
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
