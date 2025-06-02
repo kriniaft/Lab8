@@ -19,7 +19,7 @@ public class DatabaseConnector {
     private static final String URL = "jdbc:postgresql://pg:5432/studs";
     private static final String USER = "s467897";
     private static final String PASSWORD = "p0wZzpVdlHiU21tH";
-    private static Connection connection;
+    public static Connection connection;
     private static ScriptRunner runner;
     private String userNow;
 

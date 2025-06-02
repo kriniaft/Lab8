@@ -6,8 +6,12 @@ import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+
+import static database.DatabaseConnector.connection;
 
 public class AddIfMax extends Command {
    public AddIfMax(){
@@ -43,17 +47,43 @@ public class AddIfMax extends Command {
               h = fw.height(sIn, sOut);
           }
 
-        boolean isMax = env.profiles.stream().allMatch(p -> h > p.getHeight());
+        boolean isMax = isMax(h, db.getUserNow());
           if(isMax){
             Person person = new Person(db.minId(),fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut), fw.passport(sIn, sOut), fw.color(sIn, sOut), fw.country(sIn, sOut), fw.location(sIn, sOut));
-            env.profiles.add(person);
-            sOut.println("Новый человек успешно добавлен");
+            if(db.addPerson(person)){
+                env.profiles.add(person);
+                sOut.println("Новый человек успешно добавлен");
+            }else{System.out.println("Не удалось добавить пользователя в базу данных");}
           }else{
             sOut.println("О нет, кажется уже есть люди с бОльшим ростом");
           }
       }
 
-      public static void register(HashMap<String, Command> stringCommandHashMap) {
+    public boolean isMax(float height, String username) {
+        try {
+            String query = "SELECT MAX(height) FROM person WHERE username = ?";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, username);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        Float maxHeight = rs.getFloat(1);
+                        if (rs.wasNull() || height > maxHeight) {
+                            return true;
+                        } else {
+                            System.out.println("Рост не превышает максимум у текущего пользователя.");
+                            return false;
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Ошибка при сравнении роста: " + e.getMessage());
+        }
+        return false;
+    }
+
+
+    public static void register(HashMap<String, Command> stringCommandHashMap) {
         AddIfMax addIfMax = new AddIfMax();
         stringCommandHashMap.put(addIfMax.getName(), addIfMax);
       }
