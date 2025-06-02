@@ -15,10 +15,6 @@ public abstract class Command {
     protected Command(String name) {
         this.name = name;
     }
-    protected Command(DatabaseConnector db) {
-        this.db = db;
-    }
-
 
     public String getName() {
         return name;

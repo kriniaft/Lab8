@@ -8,9 +8,9 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Registration extends Command{
-    private Registration(){
-        super("registration");
+public class Login extends Command {
+    Login (){
+        super("login");
     }
     public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException {
         try{
@@ -27,21 +27,20 @@ public class Registration extends Command{
                 if(password.isEmpty()){
                     throw new NullException("Вы ничего не ввели");
                 }
-                db.registration(login, password);
+                if (db.login(login, password)){
+                    db.setUserNow(login);
+                }
             }
         } catch (NullException exc) {
             System.out.println(exc.getMessage());
         }
     }
 
-
     public String getHelp(){
-        return "Регистрирует нового пользователя";
+        return "выполняет вход в аккаунт";
     }
-
     public static void register(HashMap<String, Command> stringCommandHashMap) {
-        Registration reg = new Registration();
-        stringCommandHashMap.put(reg.getName(), reg);
+        Login login = new Login();
+        stringCommandHashMap.put(login.getName(), login);
     }
 }
-

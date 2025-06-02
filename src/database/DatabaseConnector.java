@@ -23,8 +23,12 @@ public class DatabaseConnector {
     private static ScriptRunner runner;
     private String userNow;
 
-    public void setCurrentUser(String username) {
+    public void setUserNow(String username) {
         this.userNow = username;
+    }
+
+    public String getUserNow(){
+        return userNow;
     }
 
     public void connect() throws SQLException {
@@ -194,7 +198,7 @@ public class DatabaseConnector {
                 ps.setString(2, person.getName());
                 ps.setFloat(3, person.getCoordinates().getX());
                 ps.setFloat(4, person.getCoordinates().getY());
-                ps.setInt(5, person.getCreationDate());
+                ps.setString(5, String.valueOf(person.getCreationDate()));
                 ps.setFloat(6, person.getHeight());
                 ps.setString(7, person.getPassportID());
                 ps.setString(8, String.valueOf(person.getHairColor()));
@@ -260,10 +264,6 @@ public class DatabaseConnector {
             throw new RuntimeException("SHA-384 not supported", e);
         }
     }
-
-
-
-
 
     private void setScriptRunnerConfig() {
         runner.setStopOnError(true);

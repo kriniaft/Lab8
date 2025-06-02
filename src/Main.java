@@ -3,17 +3,13 @@ import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
-
 import commands.base.*;
 import database.DatabaseConnector;
 import fileWork.FileController;
-
-
 import commands.*;
 import basic.*;
 import commands.base.Command;
 import commands.base.Environment;
-
 import javax.naming.InvalidNameException;
 
 
@@ -58,7 +54,7 @@ public class Main{
 
             System.out.println("Логин: ");
             username = sc.nextLine().trim();
-            db.setCurrentUser(username);
+            db.setUserNow(username);
             System.out.println("Пароль: ");
             String password = sc.nextLine().trim();
 
