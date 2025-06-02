@@ -38,19 +38,25 @@ public class Add extends Command {
                Location location = new Location(locX, locY, locZ);
 
                Person person = new Person(db.minId(), name, coordinates, height, passportID, color, country, location);
+               if (db.addPerson(person)){
+                   env.profiles.offerLast(person);
+                   sOut.println("Человек добавлен из скрипта.");
+               }else{
+                   System.out.println("Не удалось добавить человека в базу данных");
+               }
 
-               env.profiles.offerLast(person);
-               sOut.println("Человек добавлен из скрипта.");
-           } catch (Exception e) {
-               sOut.println("Ошибка при добавлении из скрипта: " + e.getMessage());
-           }
+           } catch (Exception e) {sOut.println("Ошибка при добавлении из скрипта: " + e.getMessage());}
+
        } else {
            FieldsWork fw = new FieldsWork();
            Person person = new Person(db.minId(), fw.name(sIn, sOut), fw.coordinates(sIn, sOut), fw.height(sIn, sOut),
                    fw.passport(sIn, sOut), fw.color(sIn, sOut), fw.country(sIn, sOut), fw.location(sIn, sOut));
-           // сохр в таблицу
-           env.profiles.offerLast(person);
-           sOut.println("Новый человек успешно добавлен");
+           if (db.addPerson(person)){
+               env.profiles.offerLast(person);
+               sOut.println("Новый человек успешно добавлен");
+           }else{
+               System.out.println("Не удалось добавить человека в базу данных");
+           }
        }
    }
 
