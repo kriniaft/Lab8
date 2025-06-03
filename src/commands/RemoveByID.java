@@ -52,7 +52,7 @@ public class RemoveByID extends Command {
 
         if (removed) {
             sOut.println("Человек с ID '" + nID + "' успешно удален.");
-
+            env.setProfiles(db.getPersons());
         } else {
             sOut.println("Человек с ID '" + nID + "' не найден в коллекции.");
         }

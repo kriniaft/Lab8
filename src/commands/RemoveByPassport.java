@@ -1,9 +1,12 @@
 package commands;
+import basic.Person;
 import commands.base.*;
 import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.SQLException;
+import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -12,7 +15,7 @@ public class RemoveByPassport extends Command{
         super("remove_any_by_passport_id");
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException {
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException, SQLException {
         FieldsWork fw = new FieldsWork();
         String pID;
 
@@ -37,13 +40,13 @@ public class RemoveByPassport extends Command{
             pID = fw.passport(sIn, sOut);
         }
 
-
         boolean removed = false;
-        Iterator<basic.Person> iterator = env.getProfiles().iterator();
+        ArrayDeque<Person> persons = db.loadPersonsByUser(db.getUserNow());
+        Iterator<Person> iterator = persons.iterator();
         while (iterator.hasNext()) {
             basic.Person person = iterator.next();
             if (person.getPassportID().equals(pID)) {
-                iterator.remove();
+                db.deletePerson(person);
                 removed = true;
                 break;
             }
@@ -51,6 +54,7 @@ public class RemoveByPassport extends Command{
 
         if (removed) {
             sOut.println("Человек с паспортным ID '" + pID + "' успешно удален.");
+            env.setProfiles(db.getPersons());
         } else {
             sOut.println("Человек с паспортным ID '" + pID + "' не найден в коллекции.");
         }
