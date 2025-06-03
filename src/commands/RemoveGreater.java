@@ -5,6 +5,8 @@ import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.SQLException;
+import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -22,19 +24,21 @@ public class RemoveGreater extends Command{
         stringCommandHashMap.put(removeGreater.getName(), removeGreater);
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db){
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws SQLException {
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
             sOut.println("Коллекция пуста или не инициализирована");
             return;
         }
 
-        Iterator<Person> iterator = env.profiles.iterator();
+        ArrayDeque<Person> persons = db.loadPersonsByUser(db.getUserNow());
+        Iterator<Person> iterator = persons.iterator();
         FieldsWork fw = new FieldsWork();
         float maxHeight = fw.height(sIn, sOut);
         while (iterator.hasNext()) {
             Person person = iterator.next();
             if (person.getHeight() > maxHeight) {
-                iterator.remove();
+               if(db.deletePerson(person)){
+                iterator.remove();}
             }
         }
         sOut.println("Процесс удаления по росту выполнен");
