@@ -5,6 +5,7 @@ import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -23,9 +24,6 @@ public class UpdateID extends Command {
             return;
         }
 
-        Iterator<Person> iterator = env.profiles.iterator();
-        boolean found = false;
-
         if (commandsArgs.length > 0) {
             try {
                 id = Long.parseLong(commandsArgs[0]);
@@ -34,24 +32,18 @@ public class UpdateID extends Command {
                 sOut.println("Ошибка: неверный формат ID. Используйте положительное число");
                 return;
             }
-        }
-        else {
+        } else {
             id = fw.id(sIn, sOut);
         }
 
-        while (iterator.hasNext()) {
-            Person person = iterator.next();
-            if (person.getId() == id) {
-                float height = fw.height(sIn, sOut);
-                person.setHeight(height);
-                sOut.println("Рост успешно изменен");
-                found = true;
-                break;
+        float newHeight = fw.height(sIn, sOut);
+        if(db.updateByUd(newHeight, id)) {
+            for (Person person : env.profiles) {
+                if (person.getId() == id) {
+                    person.setHeight(newHeight);
+                    return;
+                }
             }
-        }
-
-        if(!found) {
-            sOut.println("Не удалось изменить рост по введенному id");
         }
     }
 

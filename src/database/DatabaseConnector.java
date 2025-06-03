@@ -258,6 +258,28 @@ public class DatabaseConnector {
         return condition;
     }
 
+    public boolean updateByUd(float h, long id){
+
+        String sql = "UPDATE person SET height = ? WHERE id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setFloat(1, h);
+            ps.setLong(2, id);
+            int affected = ps.executeUpdate();
+
+            if (affected == 0) {
+                System.out.println("Не удалось изменить рост: элемент с таким ID не найден в базе данных");
+                return false;
+            }
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Ошибка при обновлении базы данных: " + e.getMessage());
+        }
+        return false;
+    }
+
     public boolean deletePerson(Person person) throws SQLException {
         String sql = "DELETE FROM person WHERE id = ?";
         long id = person.getId();
