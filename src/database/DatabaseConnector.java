@@ -63,50 +63,7 @@ public class DatabaseConnector {
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                long id = rs.getLong("id");
-                String name = rs.getString("name");
-
-                Coordinates coords = new Coordinates();
-                coords.setX(rs.getFloat("coord_x"));
-                coords.setY(rs.getFloat("coord_y"));
-
-                Color hairColor = null;
-                try {
-                    String hairColorStr = rs.getString("hair_color");
-                    if (hairColorStr != null) {
-                        hairColor = Color.valueOf(hairColorStr);
-                    }
-                } catch (IllegalArgumentException e) {
-                    hairColor = null;
-                }
-
-                Country nationality = null;
-                try {
-                    String nationalityStr = rs.getString("nationality");
-                    if (nationalityStr != null) {
-                        nationality = Country.valueOf(nationalityStr);
-                    }
-                } catch (IllegalArgumentException e) {
-                    nationality = null;
-                }
-
-                Float height = rs.getObject("height") != null ? rs.getFloat("height") : null;
-                String passportID = rs.getString("passport_id");
-
-                Location location = new Location();
-                location.setX(rs.getFloat("locat_x"));
-                location.setY(rs.getFloat("locat_y"));
-                location.setZ(rs.getFloat("locat_z"));
-
-                Timestamp ts = rs.getTimestamp("creation_date");
-                ZonedDateTime creationDate;
-                if (ts != null) {
-                    creationDate = ts.toInstant().atZone(nationality != null ? nationality.getZoneId() : ZoneId.systemDefault());
-                } else {
-                    creationDate = nationality != null ? ZonedDateTime.now(nationality.getZoneId()) : ZonedDateTime.now();
-                }
-
-                Person person = new Person(id, name, coords, height, passportID, hairColor, nationality, location, creationDate);
+                Person person = getPersonBy(rs);
                 persons.add(person);
             }
         } catch (SQLException e) {
@@ -133,6 +90,70 @@ public class DatabaseConnector {
         }
         return users;
     }
+
+    public ArrayDeque<Person> loadPersonsByUser(String username) throws SQLException {
+        ArrayDeque<Person> people = new ArrayDeque<>();
+        String sql = "SELECT * FROM person WHERE username = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Person person = getPersonBy(rs);
+                    people.add(person);
+                }
+            }
+        }
+        return people;
+    }
+
+    public Person getPersonBy(ResultSet rs) throws SQLException {
+        long id = rs.getLong("id");
+        String name = rs.getString("name");
+
+        Coordinates coords = new Coordinates();
+        coords.setX(rs.getFloat("coord_x"));
+        coords.setY(rs.getFloat("coord_y"));
+
+        Color hairColor = null;
+        try {
+            String hairColorStr = rs.getString("hair_color");
+            if (hairColorStr != null) {
+                hairColor = Color.valueOf(hairColorStr);
+            }
+        } catch (IllegalArgumentException e) {
+            hairColor = null;
+        }
+
+        Country nationality = null;
+        try {
+            String nationalityStr = rs.getString("nationality");
+            if (nationalityStr != null) {
+                nationality = Country.valueOf(nationalityStr);
+            }
+        } catch (IllegalArgumentException e) {
+            nationality = null;
+        }
+
+        Float height = rs.getObject("height") != null ? rs.getFloat("height") : null;
+        String passportID = rs.getString("passport_id");
+
+        Location location = new Location();
+        location.setX(rs.getFloat("locat_x"));
+        location.setY(rs.getFloat("locat_y"));
+        location.setZ(rs.getFloat("locat_z"));
+
+        Timestamp ts = rs.getTimestamp("creation_date");
+        ZonedDateTime creationDate;
+        if (ts != null) {
+            creationDate = ts.toInstant().atZone(nationality != null ? nationality.getZoneId() : ZoneId.systemDefault());
+        } else {
+            creationDate = nationality != null ? ZonedDateTime.now(nationality.getZoneId()) : ZonedDateTime.now();
+        }
+
+        return new Person(id, name, coords, height, passportID, hairColor, nationality, location, creationDate);
+    }
+
 
     public void registration(String username, String password) {
         try {
