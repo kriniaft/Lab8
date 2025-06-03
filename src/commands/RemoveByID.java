@@ -5,6 +5,8 @@ import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.SQLException;
+import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -13,7 +15,7 @@ public class RemoveByID extends Command {
         super("remove_by_id");
     }
 
-    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException{
+    public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException, SQLException {
         FieldsWork fw = new FieldsWork();
         long nID;
         if (env.getProfiles() == null || env.getProfiles().isEmpty()) {
@@ -37,11 +39,12 @@ public class RemoveByID extends Command {
 
 
         boolean removed = false;
-        Iterator<Person> iterator = env.getProfiles().iterator();
+        ArrayDeque<Person> persons = db.loadPersonsByUser(db.getUserNow());
+        Iterator<Person> iterator = persons.iterator();
         while (iterator.hasNext()) {
             basic.Person person = iterator.next();
             if (person.getId() == nID) {
-                iterator.remove();
+                db.deletePerson(person);
                 removed = true;
                 break;
             }
@@ -49,6 +52,7 @@ public class RemoveByID extends Command {
 
         if (removed) {
             sOut.println("Человек с ID '" + nID + "' успешно удален.");
+
         } else {
             sOut.println("Человек с ID '" + nID + "' не найден в коллекции.");
         }

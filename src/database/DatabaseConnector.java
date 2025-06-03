@@ -258,6 +258,17 @@ public class DatabaseConnector {
         return condition;
     }
 
+    public boolean deletePerson(Person person) throws SQLException {
+        String sql = "DELETE FROM person WHERE id = ?";
+        long id = person.getId();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, id);
+            int affected = ps.executeUpdate();
+            return affected > 0;
+        }
+    }
+
+
     public int minId() throws SQLException {
         String sql = "SELECT id FROM person ORDER BY id";
         try (PreparedStatement ps = connection.prepareStatement(sql);
