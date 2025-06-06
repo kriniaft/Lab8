@@ -1,5 +1,6 @@
 package commands.base;
 import commands.*;
+
 import java.util.HashMap;
 
 public class MapFilling {
@@ -17,7 +18,6 @@ public class MapFilling {
         RemoveGreater.register(map);
         Show.register(map);
         UpdateID.register(map);
-        Save.register(map);
         ExecuteScript.register(map);
         Registration.register(map);
         Login.register(map);

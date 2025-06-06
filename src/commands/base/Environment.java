@@ -12,15 +12,13 @@ public final class Environment {
     private final HashMap<String, Command> commandForEveryone;
     public ArrayDeque<Person> profiles = new ArrayDeque<>();
     private final LocalDateTime collectionInitializationDate;
-    private final String arg;
     private boolean scriptMode = false;
 
-    public Environment(HashMap<String, Command> stringCommandHashmap, HashMap<String, Command> commandForEveryone, ArrayDeque<Person> profiles, String[] arg) {
+    public Environment(HashMap<String, Command> stringCommandHashmap, HashMap<String, Command> commandForEveryone, ArrayDeque<Person> profiles) {
         this.stringCommandHashmap = stringCommandHashmap;
         this.commandForEveryone = commandForEveryone;
         this.profiles = profiles;
         this.collectionInitializationDate = LocalDateTime.now();
-        this.arg = arg[0];
     }
 
     public HashMap<String, Command> getStringCommandHashmap() {
@@ -41,10 +39,6 @@ public final class Environment {
 
     public LocalDateTime getCollectionInitializationDate() {
         return collectionInitializationDate;
-    }
-
-    public String getFileName(){
-        return arg;
     }
 
     public boolean isScriptMode() {

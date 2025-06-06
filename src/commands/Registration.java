@@ -15,7 +15,6 @@ public class Registration extends Command{
     public void execute(Environment env, InputStream sIn, PrintStream sOut, String[] commandsArgs, DatabaseConnector db) throws NullException {
         try{
             Scanner sc = new Scanner(System.in);
-            while (true) {
                 System.out.println("ведите логин:");
                 String login = sc.nextLine();
                 if (login.isEmpty()) {
@@ -27,7 +26,6 @@ public class Registration extends Command{
                     throw new NullException("Вы ничего не ввели");
                 }
                 db.registration(login, password);
-            }
         } catch (NullException exc) {
             System.out.println(exc.getMessage());
         }

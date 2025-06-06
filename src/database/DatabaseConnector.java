@@ -16,7 +16,7 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 public class DatabaseConnector {
-    private static final String URL = "jdbc:postgresql://pg:5432/studs";
+    private static final String URL = "jdbc:postgresql://localhost:5432/studs";
     private static final String USER = "s467897";
     private static final String PASSWORD = "p0wZzpVdlHiU21tH";
     public static Connection connection;
@@ -216,19 +216,19 @@ public class DatabaseConnector {
         try {
             connection.setAutoCommit(false);
             int id = minId();
-            String sql = "INSERT INTO music_bands "
-                    + "(id,name,coord_x,coord_y,number_of_participants,genre,studio_name,created_by) "
-                    + "VALUES (?, ?, ?, ?, ?, ?::music_genre, ?, ?)";
+            String sql = "INSERT INTO person "
+                    + "(id,name,coord_x,coord_y,creation_date,height,passport_id,hair_color, nationality, locat_x, locat_y, locat_z, username) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?::color, ?::country, ?, ?, ?, ?)";
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, id);
                 ps.setString(2, person.getName());
                 ps.setFloat(3, person.getCoordinates().getX());
                 ps.setFloat(4, person.getCoordinates().getY());
-                ps.setString(5, String.valueOf(person.getCreationDate()));
+                ps.setTimestamp(5, Timestamp.from(person.getCreationDate().toInstant()));
                 ps.setFloat(6, person.getHeight());
                 ps.setString(7, person.getPassportID());
-                ps.setString(8, String.valueOf(person.getHairColor()));
-                ps.setString(9, String.valueOf(person.getNationality()));
+                ps.setString(8, person.getHairColor().name());
+                ps.setString(9, person.getNationality().name());
                 ps.setFloat(10, person.getLocation().getX());
                 ps.setFloat(11, person.getLocation().getY());
                 ps.setFloat(12, person.getLocation().getZ());
@@ -243,6 +243,7 @@ public class DatabaseConnector {
             condition = true;
         } catch (SQLException e) {
             System.out.println("Не получилось добавить человека");
+            e.printStackTrace();
             try {
                 connection.rollback();
             } catch (SQLException ex) {

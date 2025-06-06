@@ -13,6 +13,15 @@ CREATE TYPE color AS ENUM (
     'WHITE'
 );
 
+CREATE TYPE country  AS ENUM
+(
+    'USA'
+    'GERMANY'
+    'SPAIN'
+    'CHINA'
+
+);
+
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
     login TEXT UNIQUE NOT NULL,
@@ -33,6 +42,7 @@ CREATE TABLE person (
     locat_x       FLOAT       NOT NULL,
     locat_y       FLOAT,
     locat_z       FLOAT       NOT NULL
+    username      TEXT        NOT NULL
 
 );
 
@@ -46,5 +56,3 @@ SELECT name,
            WHEN 'CHINA' THEN 'Asia/Shanghai'
            END AS local_time
 FROM Person;
-
-CREATE INDEX idx_music_bands_created_by ON music_bands(created_by);
