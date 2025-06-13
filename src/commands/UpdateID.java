@@ -5,9 +5,7 @@ import database.DatabaseConnector;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class UpdateID extends Command {
     private UpdateID() {

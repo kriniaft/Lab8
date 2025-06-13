@@ -1,7 +1,6 @@
 package basic;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.Random;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -11,7 +10,7 @@ public class Person {
     private long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name;
     private Coordinates coordinates;
-    private final java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Float height;
     private String passportID;
     private Color hairColor;
@@ -31,13 +30,11 @@ public class Person {
         this.nationality = nt;
         this.location = l;
 
-        this.creationDate = ZonedDateTime.now(nationality.getZoneId());
+        this.creationDate = creationDate;
     }
 
-    public Person(long id, String n, Coordinates c, Float h, String p,
-                  Color hc, Country nt, Location l) {
-        this(id, n, c, h, p, hc, nt, l,
-                ZonedDateTime.now(nt.getZoneId()));
+    public Person(long id, String n, Coordinates c, Float h, String p, Color hc, Country nt, Location l) {
+        this(id, n, c, h, p, hc, nt, l, ZonedDateTime.now(nt.getZoneId()));
     }
 
     @XmlElement
@@ -125,10 +122,19 @@ public class Person {
         return location;
     }
 
+    @XmlElement
+    public String getCreator() {
+        return Creator;
+    }
+
+    public void setCreator(String creator) {
+        this.Creator = creator;
+    }
 
     public void setId(int anInt) {
         id = anInt;
     }
+
 
 
 

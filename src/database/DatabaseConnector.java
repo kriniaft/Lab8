@@ -31,11 +31,9 @@ public class DatabaseConnector {
         return userNow;
     }
 
-    public void connect() throws SQLException {
+    public void connect(){
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            runner = new ScriptRunner(connection);
-            setScriptRunnerConfig();
         }catch(SQLException ex){
             System.out.println("Ошибка соединения");
         }
@@ -45,29 +43,35 @@ public class DatabaseConnector {
         return connection;
     }
 
-
-    public void create() {
-        try (Reader fr = Files.newBufferedReader(
-                Paths.get("src/database/createSQL"),
-                StandardCharsets.UTF_8
-        )) {
-            runner.runScript(fr);
-        } catch (IOException e) {
-            System.out.println("Ошибка при работе с файлом");;
-        }
-    }
-
-    public ArrayDeque<Person> getPersons() {
+    public ArrayDeque<Person> getPersons() throws SQLException {
         ArrayDeque<Person> persons = new ArrayDeque<>();
-        String sql = "SELECT id, name, coord_x, coord_y, creation_date, height, passport_id, hair_color, nationality, locat_x, locat_y, locat_z FROM person";
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        String query = "SELECT * FROM person";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
-                Person person = getPersonBy(rs);
+                long id = rs.getLong("id");
+                String name = rs.getString("name");
+                float coordX = rs.getFloat("coord_x");
+                float coordY = rs.getFloat("coord_y");
+                float height = rs.getFloat("height");
+                String passportID = rs.getString("passport_id");
+                String hairColor = rs.getString("hair_color");
+                String nationality = rs.getString("nationality");
+                float locX = rs.getFloat("locat_x");
+                float locY = rs.getFloat("locat_y");
+                float locZ = rs.getFloat("locat_z");
+                String creator = rs.getString("username");
+                ZonedDateTime creationDate = rs.getTimestamp("creation_date").toLocalDateTime().atZone(ZoneId.systemDefault());
+
+                Coordinates coordinates = new Coordinates(coordX, coordY);
+                Location location = new Location(locX, locY, locZ);
+                Person person = new Person(id, name, coordinates, height, passportID, Color.valueOf(hairColor), Country.valueOf(nationality), location, creationDate);
+                person.setCreator(creator);
                 persons.add(person);
             }
-        } catch (SQLException e) {
-            System.out.println("Ошибка при чтении скрипта SQL");;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
         }
         return persons;
     }
@@ -151,7 +155,9 @@ public class DatabaseConnector {
             creationDate = nationality != null ? ZonedDateTime.now(nationality.getZoneId()) : ZonedDateTime.now();
         }
 
-        return new Person(id, name, coords, height, passportID, hairColor, nationality, location, creationDate);
+        Person person = new Person(id, name, coords, height, passportID, hairColor, nationality, location, creationDate);
+        person.setCreator(rs.getString("username"));
+        return person;
     }
 
 
@@ -282,8 +288,19 @@ public class DatabaseConnector {
     }
 
     public boolean deletePerson(Person person) throws SQLException {
-        String sql = "DELETE FROM person WHERE id = ?";
+        String sql = "DELETE FROM person WHERE id = ? AND username = ?";
         long id = person.getId();
+        String creator = person.getCreator();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ps.setString(2, creator);
+            int affected = ps.executeUpdate();
+            return affected > 0;
+        }
+    }
+
+    public boolean removePersonById(long id) throws SQLException {
+        String sql = "DELETE FROM person WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, id);
             int affected = ps.executeUpdate();
@@ -291,6 +308,13 @@ public class DatabaseConnector {
         }
     }
 
+    public void clearPersonsByUser(String username) throws SQLException {
+        String sql = "DELETE FROM person WHERE username = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.executeUpdate();
+        }
+    }
 
     public int minId() throws SQLException {
         String sql = "SELECT id FROM person ORDER BY id";
@@ -325,11 +349,5 @@ public class DatabaseConnector {
         }
     }
 
-    private void setScriptRunnerConfig() {
-        runner.setStopOnError(true);
-        runner.setAutoCommit(false);
-        runner.setLogWriter(null);
-        runner.setSendFullScript(false);
-    }
 }
 
